@@ -3,7 +3,7 @@ capybara-*.html
 .rspec
 /log
 /tmp
-/db
+/db/mongo
 /public/system
 /coverage/
 /spec/tmp
