@@ -4,10 +4,12 @@
 
 Get and install [Docker](https://www.docker.com/products/docker).
 
+If you are using Docker on Windows, make sure to [enable shared drives](https://docs.docker.com/docker-for-windows/#shared-drives) in your tray.
+
 In the project root build the containers and start them up:
 
     docker-compose up --build
-    
+
 Initialize the database:
 
     docker-compose run website rake db:create db:setup
