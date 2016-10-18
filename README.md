@@ -4,7 +4,7 @@
 
 Get and install [Docker](https://www.docker.com/products/docker).
 
-If you are using Docker on Windows, make sure to [enable shared drives](https://docs.docker.com/docker-for-windows/#shared-drives) in your tray.
+If you are using Docker on Windows, make sure to [enable shared drives](https://docs.docker.com/docker-for-windows/#shared-drives). Check your tray for for the Docker icon, and select settings once you right click it.
 
 In the project root build the containers and start them up:
 
