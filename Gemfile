@@ -48,6 +48,10 @@ group :development do
   gem 'brakeman', :require => false
   # RuboCop is a static code analyzer tool that will ensure code quality
   gem 'rubocop', require: false
+  # Looks for query optimations to avoid n+1 issues. Read more: https://sitepoint.com/silver-bullet-n1-problem
+  #gem 'bullet' # Has an issue with no support mongoid v6.0.0, re-asses later
+  # Lints js assets
+  gem 'jshint'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
