@@ -45,7 +45,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Brakeman is used to detect security risks in the application
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
   # RuboCop is a static code analyzer tool that will ensure code quality
   gem 'rubocop', require: false
   # Looks for query optimations to avoid n+1 issues. Read more: https://sitepoint.com/silver-bullet-n1-problem
