@@ -49,7 +49,8 @@ group :development do
   # RuboCop is a static code analyzer tool that will ensure code quality
   gem 'rubocop', require: false
   # Looks for query optimations to avoid n+1 issues. Read more: https://sitepoint.com/silver-bullet-n1-problem
-  #gem 'bullet' # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
+  # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
+  #gem 'bullet'
   # Lints js assets
   gem 'jshint'
 end
