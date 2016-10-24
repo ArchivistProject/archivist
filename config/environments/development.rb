@@ -54,6 +54,7 @@ Rails.application.configure do
     config.logger = ActiveSupport::Logger.new(STDOUT) 
   end
 
+  # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
   #config.after_initialize do
   #  #Enables bullet in application
   #  Bullet.enable = true
