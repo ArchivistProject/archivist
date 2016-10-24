@@ -44,6 +44,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Brakeman is used to detect security risks in the application
+  gem 'brakeman', :require => false
+  # RuboCop is a static code analyzer tool that will ensure code quality
+  gem 'rubocop', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
