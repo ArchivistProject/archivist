@@ -53,4 +53,11 @@ Rails.application.configure do
     config.web_console.whitelisted_ips = '0.0.0.0/0' # all ip-addresses
     config.logger = ActiveSupport::Logger.new(STDOUT) 
   end
+
+  # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
+  #config.after_initialize do
+  #  #Enables bullet in application
+  #  Bullet.enable = true
+  #  Bullet.console = true # Enables the output on browser console
+  #end
 end

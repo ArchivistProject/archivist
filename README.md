@@ -48,4 +48,6 @@ To freeup diskspace use:
 
 Which is useful if you are rebuilding the containers a lot.
 
+To run static analysis tasks:
 
+    sudo docker-compose run website rake static_analysis
