@@ -19,4 +19,4 @@ services:
     environment:
       - DOCKERIZED=true
     volumes:
-      - '.:/archivist'
+      - '.:/archivist-api'

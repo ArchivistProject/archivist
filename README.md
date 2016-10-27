@@ -26,10 +26,10 @@ To stop the containers `CTRL-C` on the terminal running them, then execute:
 
 If you did not see something like this:
 
-    Stopping archivist_website_1 ...
-	Stopping archivist_mongodb_1 ...
-	Killing archivist_website_1 ... done
-	Killing archivist_mongodb_1 ... done
+    Stopping archivist-api_website_1 ...
+	Stopping archivist-api_mongodb_1 ...
+	Killing archivist-api_website_1 ... done
+	Killing archivist-api_mongodb_1 ... done
 
 The Rails logs can be viewed in the terminal where you ran `docker-compose up`.
 
