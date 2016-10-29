@@ -1,4 +1,14 @@
-  Rails:
-    Enabled: true
-  Metrics/LineLength:
-    Enabled: false
+AllCops:
+  Exclude:
+    - 'bin/**'
+
+Rails:
+  Enabled: true
+Metrics/LineLength:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/LeadingCommentSpace:
+  Enabled: false
