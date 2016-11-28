@@ -2,7 +2,7 @@
 
 ## Administration
 
-These commands are run from your archivist-docker directory.
+These commands are run from your [`./archivist-docker`](https://github.com/ArchivistProject/archivist-docker) directory.
 
 You can access the Rails interactive console with:
 
