@@ -51,8 +51,6 @@ group :development do
   # Looks for query optimations to avoid n+1 issues. Read more: https://sitepoint.com/silver-bullet-n1-problem
   # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
   #gem 'bullet'
-  # Lints js assets
-  gem 'jshint'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

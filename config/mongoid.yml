@@ -1,12 +1,12 @@
 development:
   clients:
     default:
-      database: archivist_development
+      database: archivist-api_development
       hosts:
         - mongodb:27017
 test:
   clients:
     default:
-      database: archivist_test
+      database: archivist-api_test
       hosts:
         - mongodb:27017

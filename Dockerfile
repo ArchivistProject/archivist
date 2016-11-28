@@ -8,7 +8,7 @@ RUN apt-get update && \
         libxml2-dev libxslt1-dev \
     && rm -rf /var/lib/apt/lists/*
 
-ENV INSTALL_PATH /archivist
+ENV INSTALL_PATH /archivist-api
 
 RUN mkdir -p $INSTALL_PATH
 
