@@ -51,7 +51,7 @@ Rails.application.configure do
 
   if ENV['DOCKERIZED'] == 'true'
     config.web_console.whitelisted_ips = '0.0.0.0/0' # all ip-addresses
-    config.logger = ActiveSupport::Logger.new(STDOUT) 
+    config.logger = ActiveSupport::Logger.new(STDOUT)
   end
 
   # TODO: Has an issue with no mongoid support v6.0.0, re-asses later
