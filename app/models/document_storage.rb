@@ -3,15 +3,8 @@ class DocumentStorage < MongoidBase
 
   field :type, type: String
 
-  def read
-
+  def html?
+    self.type == DocumentStorageType::Html.TYPE
   end
 
-  def write
-
-  end
-
-  def search_content(target)
-
-  end
 end

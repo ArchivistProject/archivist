@@ -1,4 +1,5 @@
-class HtmlStorage < DocumentStorage
+module DocumentStorageType
+  class Html < DocumentStorage
   TYPE = 'HTML'
 
   def read
@@ -13,4 +14,5 @@ class HtmlStorage < DocumentStorage
 
   end
 
+  end
 end

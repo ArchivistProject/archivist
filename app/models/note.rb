@@ -1,4 +1,4 @@
-class Note < Mongoid_Base
+class Note < MongoidBase
   belongs_to :document
 
   has_many :tag_arrays

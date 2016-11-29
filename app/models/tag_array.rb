@@ -1,4 +1,4 @@
-class TagArray < Mongoid_Base
+class TagArray < MongoidBase
   belongs_to :document
   belongs_to :note
 

@@ -1,3 +1,3 @@
-class Mongoid_Base
+class MongoidBase
   include Mongoid::Document
 end
