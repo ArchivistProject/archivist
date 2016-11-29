@@ -1,5 +1,4 @@
-module DocumentStorageType
-  class Html < DocumentStorage
+class DocumentStorageType::Html < DocumentStorage
   TYPE = 'HTML'
 
   def read
@@ -11,8 +10,6 @@ module DocumentStorageType
   end
 
   def search_content(target)
-
-  end
 
   end
 end
