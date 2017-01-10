@@ -7,6 +7,6 @@ class Document < MongoidBase
   has_many :notes
   has_many :metadata_groupings
 
-  def initialize
-  end
+  #def initialize
+  #end
 end
