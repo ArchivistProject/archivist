@@ -1,5 +1,8 @@
 class MetadataFieldSerializer < ActiveModel::Serializer
   belongs_to :metadata_grouping
 
-  attributes :name, :type, :data
+  attributes :id,
+             :name,
+             :type,
+             :data
 end

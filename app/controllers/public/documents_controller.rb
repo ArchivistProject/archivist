@@ -4,7 +4,7 @@ class Public::DocumentsController < ApplicationController
     doc = Document.new
 
     group = MetadataGrouping.new
-    group.name = 'Generic'
+    group.name = MetadataGrouping::GENERIC
     puts params
     [[:title,'string'], [:author,'string'], [:date_added,'date']].each do |n,t|
       field = MetadataField.new
