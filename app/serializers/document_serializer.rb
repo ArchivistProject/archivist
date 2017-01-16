@@ -3,7 +3,7 @@ class DocumentSerializer < ActiveModel::Serializer
 
   has_many :metadata_groupings, key: :metadata_fields do
     generic, others = object.metadata_groupings.partition {|g| g.name == MetadataGrouping::GENERIC}
-    (generic + others).inject([]) do |memo, group|
+    (generic + others.sort_by {|g| g.name}).inject([]) do |memo, group|
       memo << group.sorted_fields
     end.flatten
   end
