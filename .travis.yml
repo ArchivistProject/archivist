@@ -11,4 +11,5 @@ before_install:
 install: ls
 
 script:
-- docker-compose run api rake test
+  - docker-compose run api rake static_analysis
+  - docker-compose run api rake test
