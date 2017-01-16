@@ -1,3 +1,3 @@
 class MetadataFieldType::Date < MetadataField
-  TYPE = 'date'
+  TYPE = 'date'.freeze
 end
