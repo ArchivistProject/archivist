@@ -4,7 +4,6 @@ class DocumentStorage < MongoidBase
   field :type, type: String
 
   def html?
-    self.type == DocumentStorageType::Html::TYPE
+    type == DocumentStorageType::Html::TYPE
   end
-
 end
