@@ -7,11 +7,9 @@ Rails.application.routes.draw do
 
   root to: 'documents#index'
 
-  get 'test', to: 'documents#index'
-
-  resources :documents#, only: [:index, :create, :show, :update, :destroy]
+  resources :documents, only: [:index, :show]
 
   namespace :public do
-    resources :documents#, only: [:create]
+    resources :documents, only: [:create]
   end
 end

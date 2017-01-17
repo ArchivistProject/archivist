@@ -5,7 +5,6 @@ class Public::DocumentsController < ApplicationController
 
     group = MetadataGrouping.new
     group.name = MetadataGrouping::GENERIC
-    puts params
     [[:title,'string'], [:author,'string'], [:date_added,'date']].each do |n,t|
       field = MetadataField.new
       field.name = "#{n}"
@@ -15,13 +14,10 @@ class Public::DocumentsController < ApplicationController
       group.metadata_fields << field
       field.save!
     end
-    puts 'foo'
-    puts doc
     doc.metadata_groupings << group
     group.save!
     rev.documents << doc
     doc.save!
-
 
     rev.save!
   end
