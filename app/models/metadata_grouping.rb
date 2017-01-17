@@ -7,6 +7,19 @@ class MetadataGrouping < MongoidBase
 
   has_many :metadata_fields
 
+  def add_field(name, type, data)
+    field = MetadataField.new
+    field.name = name
+    field.type = type
+    field.data = data
+
+    metadata_fields << field
+    field.save!
+    save!
+
+    field
+  end
+
   def sorted_fields
     metadata_fields.order(name: :asc)
   end

@@ -7,6 +7,13 @@ class Document < MongoidBase
   has_many :notes
   has_many :metadata_groupings
 
-  #def initialize
-  #end
+  def add_group(name)
+    group = MetadataGrouping.new
+    group.name = name
+    metadata_groupings << group
+    group.save!
+    save!
+
+    group
+  end
 end

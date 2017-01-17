@@ -1,25 +1,15 @@
 class Public::DocumentsController < ApplicationController
   def create
     rev = Revision.new
-    doc = Document.new
+    doc = rev.add_document
 
-    group = MetadataGrouping.new
-    group.name = MetadataGrouping::GENERIC
+    group = doc.add_group(MetadataGrouping::GENERIC)
     fields = [[:Title, 'string'], [:Author, 'string'], [:Date_Added, 'date']]
-    fields.each do |n, t|
-      field = MetadataField.new
-      field.name = n.to_s.replace('_', ' ')
-      field.type = t
-      field.data = params[n] unless t == 'date'
-      field.data = DateTime.now.utc if t == 'date'
-      group.metadata_fields << field
-      field.save!
+    fields.each do |name, type|
+      data = type == 'date' ? params[name] : DateTime.now.utc
+      group.add_field(name.to_s.sub('_', ' '), type, data)
     end
-    doc.metadata_groupings << group
-    group.save!
-    rev.documents << doc
-    doc.save!
 
-    rev.save!
+    render json: { success: true }
   end
 end
