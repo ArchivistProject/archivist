@@ -9,10 +9,10 @@ class MetadataField < MongoidBase
   field :constant_after_upload, type: Boolean
 
   def string?
-    self.type == MetadataFieldType::String::TYPE
+    type == MetadataFieldType::String::TYPE
   end
 
   def date?
-    self.type == MetadataFieldType::Date::TYPE
+    type == MetadataFieldType::Date::TYPE
   end
 end
