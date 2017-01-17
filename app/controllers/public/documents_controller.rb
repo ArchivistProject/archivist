@@ -6,7 +6,7 @@ class Public::DocumentsController < ApplicationController
     group = doc.add_group(MetadataGrouping::GENERIC)
     fields = [[:Title, 'string'], [:Author, 'string'], [:Date_Added, 'date']]
     fields.each do |name, type|
-      data = type == 'date' ? params[name] : DateTime.now.utc
+      data = type != 'date' ? params[name] : DateTime.now.utc
       group.add_field(name.to_s.sub('_', ' '), type, data)
     end
 
