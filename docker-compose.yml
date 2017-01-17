@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  mongodb:
+    image: mongo:3.2
+    # TODO: mongod --smallfiles?
+    command: mongod
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db/mongo:/data
+
+  api:
+    depends_on:
+      - mongodb
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DOCKERIZED=true
+      - RAILS_ENV=development
+    volumes:
+      - /archivist-api/tmp
+      - /tmp
+      - .:/archivist-api
