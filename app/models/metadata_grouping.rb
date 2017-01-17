@@ -1,5 +1,5 @@
 class MetadataGrouping < MongoidBase
-  GENERIC = 'Generic'
+  GENERIC = 'Generic'.freeze
 
   belongs_to :document
 
@@ -8,6 +8,6 @@ class MetadataGrouping < MongoidBase
   has_many :metadata_fields
 
   def sorted_fields
-    self.metadata_fields.order(name: :asc)
+    metadata_fields.order(name: :asc)
   end
 end

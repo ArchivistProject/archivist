@@ -2,7 +2,7 @@ require 'rake'
 
 namespace :factory do
   desc 'Populates the database with sample document data'
-  task :simple_doc => :environment do
+  task simple_doc: :environment do
     def create_doc(title, author, date_added)
       rev = Revision.new
       doc = Document.new
@@ -39,7 +39,7 @@ namespace :factory do
       group.save!
     end
 
-    doc = create_doc('The Time is Near', 'John Rust', Time.utc(2020,7,06,00,00,00))
+    doc = create_doc('The Time is Near', 'John Rust', Time.utc(2020, 7, 6, 0, 0, 0))
     group = add_group(doc, 'Not Generic 2')
     add_field(group, 'ZigZag 2', 'string', 'some value')
     add_field(group, 'FooBar 2', 'string', 'some value 2')
@@ -49,7 +49,7 @@ namespace :factory do
     add_field(group, 'FooBar 1', 'string', 'some value 5')
     add_field(group, 'Moo 1', 'string', 'some value 6')
 
-    doc = create_doc('What a Time', 'Dr. Alive', Time.utc(2018,5,02,00,00,00))
+    doc = create_doc('What a Time', 'Dr. Alive', Time.utc(2018, 5, 2, 0, 0, 0))
     group = add_group(doc, 'Not Generic 1')
     add_field(group, 'ZigZag 1', 'string', 'far 4')
     add_field(group, 'FooBar 1', 'string', 'far 5')

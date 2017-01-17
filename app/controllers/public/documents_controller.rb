@@ -5,12 +5,13 @@ class Public::DocumentsController < ApplicationController
 
     group = MetadataGrouping.new
     group.name = MetadataGrouping::GENERIC
-    [[:title,'string'], [:author,'string'], [:date_added,'date']].each do |n,t|
+    fields = [[:Title, 'string'], [:Author, 'string'], [:Date_Added, 'date']]
+    fields.each do |n, t|
       field = MetadataField.new
-      field.name = "#{n}"
+      field.name = n.to_s.replace('_', ' ')
       field.type = t
       field.data = params[n] unless t == 'date'
-      field.data = DateTime.now if  t == 'date'
+      field.data = DateTime.now.utc if t == 'date'
       group.metadata_fields << field
       field.save!
     end

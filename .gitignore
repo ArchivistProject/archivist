@@ -42,3 +42,6 @@ bower.json
 
 # Running PID stuff
 spring*
+
+# Rubocop stuff
+0*
