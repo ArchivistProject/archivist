@@ -1,6 +1,8 @@
 class DocumentsController < ApplicationController
   def index
-    render json: Document.all
+    params[:page] ||= 1
+    docs = Document.all.paginate(page: params[:page], per_page: 10)
+    render json: docs, meta: pagination_dict(docs)
   end
 
   def show

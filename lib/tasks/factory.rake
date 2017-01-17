@@ -2,7 +2,7 @@ require 'rake'
 
 namespace :factory do
   desc 'Populates the database with sample document data'
-  task simple_doc: :environment do
+  task simple_docs: :environment do
     def create_doc(title, author, date_added)
       rev = Revision.new
       doc = Document.new
@@ -54,5 +54,9 @@ namespace :factory do
     add_field(group, 'ZigZag 1', 'string', 'far 4')
     add_field(group, 'FooBar 1', 'string', 'far 5')
     add_field(group, 'Moo 1', 'string', 'far 6')
+
+    ('A'..'Z').each do |letter|
+      doc = create_doc("Article #{letter}", "Sir #{letter}", Time.utc(2002, 10, 15, 0, 0, 0))
+    end
   end
 end
