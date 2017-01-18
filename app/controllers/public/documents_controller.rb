@@ -1,7 +1,6 @@
 class Public::DocumentsController < ApplicationController
   def create
-    rev = Revision.new
-    doc = rev.add_document
+    doc = Document.create_new_doc
 
     group = doc.add_group(MetadataGrouping::GENERIC)
     fields = [[:Title, 'string'], [:Author, 'string'], [:Date_Added, 'date']]

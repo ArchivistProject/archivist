@@ -16,4 +16,11 @@ class Document < MongoidBase
 
     group
   end
+
+  def self.create_new_doc
+    rev = Revision.new
+    doc = rev.add_document
+
+    doc
+  end
 end

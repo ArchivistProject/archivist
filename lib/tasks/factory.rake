@@ -4,8 +4,7 @@ namespace :factory do
   desc 'Populates the database with sample document data'
   task simple_docs: :environment do
     def create_doc(title, author, date_added)
-      rev = Revision.new
-      doc = rev.add_document
+      doc = Document.create_new_doc
       group = doc.add_group(MetadataGrouping::GENERIC)
       group.add_field('Title', 'string', title)
       group.add_field('Author', 'string', author)
