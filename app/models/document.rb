@@ -5,7 +5,7 @@ class Document < MongoidBase
   has_one :tag_array
 
   has_many :notes
-  has_many :metadata_groupings
+  has_many :metadata_groupings, dependent: :destroy
 
   def add_group(name)
     group = MetadataGrouping.new

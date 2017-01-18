@@ -1,5 +1,5 @@
 class Revision < MongoidBase
-  has_many :documents
+  has_many :documents, dependent: :destroy
 
   def add_document
     doc = Document.new

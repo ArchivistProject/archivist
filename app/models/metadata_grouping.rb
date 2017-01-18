@@ -5,7 +5,7 @@ class MetadataGrouping < MongoidBase
 
   field :name, type: String
 
-  has_many :metadata_fields
+  has_many :metadata_fields, dependent: :destroy
 
   def add_field(name, type, data)
     field = MetadataField.new
