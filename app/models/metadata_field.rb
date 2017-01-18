@@ -30,7 +30,7 @@ class MetadataField < MongoidBase
   private
 
   def update_type
-    return if new_record?
+    return unless new_record?
     raise 'Must be instantiated in a specific type' if self.class == MetadataField
     self.type ||= self.class::TYPE
   end
