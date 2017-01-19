@@ -15,3 +15,13 @@ You can run the unit tests with:
 To run static analysis on the code:
 
     sudo docker-compose run api rake static_analysis
+
+### Sample Data
+
+If you ever need to clear the database use:
+
+    docker-compose run api rake db:reset
+
+If you want to populate the database with fully defined sample documents use:
+
+    docker-compose run api rake factory:simple_docs

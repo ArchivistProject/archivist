@@ -39,3 +39,9 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Running PID stuff
+spring*
+
+# Rubocop stuff
+0*

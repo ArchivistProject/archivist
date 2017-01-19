@@ -5,8 +5,22 @@ class Document < MongoidBase
   has_one :tag_array
 
   has_many :notes
-  has_many :metadata_groupings
+  has_many :metadata_groupings, dependent: :destroy
 
-  def initialize
+  def add_group(name)
+    group = MetadataGrouping.new
+    group.name = name
+    metadata_groupings << group
+    group.save!
+    save!
+
+    group
+  end
+
+  def self.create_new_doc
+    rev = Revision.new
+    doc = rev.add_document
+
+    doc
   end
 end

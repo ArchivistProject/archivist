@@ -22,5 +22,11 @@ module Archivist
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.api_only = true
+
+    # TODO: update to be more safe
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => %w(GET POST PUT DELETE OPTIONS).join(',')
+    }
   end
 end
