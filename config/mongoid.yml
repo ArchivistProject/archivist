@@ -4,9 +4,13 @@ development:
       database: archivist-api_development
       hosts:
         - mongodb:27017
+  options:
+    preload_models: true
 test:
   clients:
     default:
       database: archivist-api_test
       hosts:
         - mongodb:27017
+  options:
+    preload_models: true
