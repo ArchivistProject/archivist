@@ -5,7 +5,11 @@ class Document < MongoidBase
   has_one :tag_array
 
   has_many :notes
-  has_many :metadata_groupings, dependent: :destroy
+  has_many :metadata_groupings, dependent: :destroy do
+    def generic
+      where(name: MetadataGrouping::GENERIC).first
+    end
+  end
 
   def add_group(name)
     group = MetadataGrouping.new
