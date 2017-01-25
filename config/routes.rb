@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   resources :documents, only: [:index, :show]
 
+  resources :metadata_fields do
+    collection do
+      get 'types'
+    end
+  end
+
   namespace :public do
     resources :documents, only: [:create]
   end
