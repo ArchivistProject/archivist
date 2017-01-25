@@ -27,6 +27,12 @@ class MetadataField < MongoidBase
     end
   end
 
+  def self.types
+    MetadataFieldType.constants.map do |c|
+      c.to_s if MetadataFieldType.const_get(c).include? Mongoid::Document
+    end.compact
+  end
+
   private
 
   def update_type
