@@ -7,7 +7,7 @@ class Document < MongoidBase
   has_many :notes
   has_many :metadata_groupings, dependent: :destroy do
     def generic
-      where(name: MetadataGrouping::GENERIC).first
+      find_by(name: MetadataGrouping::GENERIC)
     end
   end
 
