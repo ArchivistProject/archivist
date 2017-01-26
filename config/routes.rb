@@ -25,4 +25,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :system do
+    resources :groups, only: [:index, :show, :create, :update, :destroy] do
+      resources :field, only: [:create, :update, :destroy]
+    end
+  end
 end
