@@ -18,27 +18,27 @@ class MetadataField < MongoidBase
     type == MetadataFieldType::Date::TYPE
   end
 
-  def self.create_new_field(t)
-    case t
-    when MetadataFieldType::String::TYPE
-      MetadataFieldType::String.new
-    when MetadataFieldType::Date::TYPE
-      MetadataFieldType::Date.new
+  def self.create_new_field(new_type)
+    MetadataField.type_models.map do |t|
+      return t.new if new_type == t::TYPE
     end
+    raise 'Unkown MetadataField type: ' + new_type
   end
 
   def self.types
-    MetadataFieldType.constants.map do |c|
-      t = MetadataFieldType.const_get(c)
-      if t.include? Mongoid::Document
-        t::TYPE
-      else
-        nil
-      end
-    end.compact
+    MetadataField.type_models.map do |t|
+      t::TYPE
+    end
   end
 
   private
+
+  def self.type_models
+    MetadataFieldType.constants.map do |c|
+      t = MetadataFieldType.const_get(c)
+      t if t.include? Mongoid::Document
+    end.compact
+  end
 
   def update_type
     return unless new_record?
