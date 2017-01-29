@@ -6,7 +6,6 @@ development:
         - mongodb:27017
   options:
     preload_models: true
-    raise_not_found_error: false
 test:
   clients:
     default:

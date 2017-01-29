@@ -22,6 +22,8 @@ class ApplicationController < ActionController::API
     return nil if decoded_token.nil?
 
     User.find(decoded_token[:user_id])
+  rescue
+    nil
   end
 
   def authenticate_request
