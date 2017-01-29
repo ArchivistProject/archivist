@@ -23,6 +23,8 @@ module Archivist
     # -- all .rb files in that directory are automatically loaded.
     config.api_only = true
 
+    config.autoload_paths << Rails.root.join('lib')
+
     # TODO: update to be more safe
     config.action_dispatch.default_headers = {
       'Access-Control-Allow-Origin' => '*',
