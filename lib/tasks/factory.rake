@@ -8,6 +8,7 @@ namespace :factory do
     g.rows << Grouping::Row.new(name: 'Author', type: MetadataFieldType::String::TYPE)
     g.rows << Grouping::Row.new(name: 'Date Added', type: MetadataFieldType::Date::TYPE)
     g.rows << Grouping::Row.new(name: 'Date Published', type: MetadataFieldType::Date::TYPE)
+    g.rows << Grouping::Row.new(name: 'Item Size', type: MetadataFieldType::String::TYPE)
     g.save!
 
     g = Grouping::Group.new(name: MetadataGrouping::WEB)
