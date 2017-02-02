@@ -9,9 +9,6 @@ class System::GroupsController < ApplicationController
 
   def create
     g = Grouping::Group.new(params.require(:group).permit(:name))
-    params.permit(:fields).each do |r|
-      g.rows << Grouping::Row.new(r.permit(:name, :type))
-    end
     g.save!
     render json: g, root: 'group'
   end
