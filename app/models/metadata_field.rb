@@ -31,14 +31,14 @@ class MetadataField < MongoidBase
     end
   end
 
-  private
-
-  def self.type_models
+  private_class_method def self.type_models
     MetadataFieldType.constants.map do |c|
       t = MetadataFieldType.const_get(c)
       t if t.include? Mongoid::Document
     end.compact
   end
+
+  private
 
   def update_type
     return unless new_record?
