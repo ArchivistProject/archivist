@@ -1,5 +1,5 @@
 class MetadataField < MongoidBase
-  belongs_to :metadata_grouping
+  belongs_to :metadata_group
 
   after_initialize :update_type
 
