@@ -1,5 +1,6 @@
 class MetadataGrouping < MongoidBase
   GENERIC = 'Generic'.freeze
+  WEB = 'Website'.freeze
 
   belongs_to :document
 
