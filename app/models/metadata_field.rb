@@ -31,7 +31,8 @@ class MetadataField < MongoidBase
     end
   end
 
-  private_class_method def self.type_models
+  #TODO: should be private
+  def self.type_models
     MetadataFieldType.constants.map do |c|
       t = MetadataFieldType.const_get(c)
       t if t.include? Mongoid::Document
