@@ -5,16 +5,16 @@ class Document < MongoidBase
   has_one :tag_array
 
   has_many :notes
-  has_many :metadata_groupings, dependent: :destroy do
+  has_many :metadata_groups, dependent: :destroy do
     def generic
-      find_by(name: MetadataGrouping::GENERIC)
+      find_by(name: MetadataGroup::GENERIC)
     end
   end
 
   def add_group(name)
-    group = MetadataGrouping.new
+    group = MetadataGroup.new
     group.name = name
-    metadata_groupings << group
+    metadata_groups << group
     group.save!
     save!
 

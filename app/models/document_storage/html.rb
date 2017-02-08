@@ -1,4 +1,4 @@
-class DocumentStorageType::Html < DocumentStorage
+class DocumentStorage::Html < DocumentStorage
   TYPE = 'HTML'.freeze
 
   def read

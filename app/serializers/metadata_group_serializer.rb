@@ -1,4 +1,4 @@
-class MetadataGroupingSerializer < ActiveModel::Serializer
+class MetadataGroupSerializer < ActiveModel::Serializer
   belongs_to :document
   has_many :metadata_fields
 

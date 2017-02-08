@@ -1,4 +1,4 @@
-class MetadataGrouping < MongoidBase
+class MetadataGroup < MongoidBase
   GENERIC = 'Generic'.freeze
   WEB = 'Website'.freeze
 
