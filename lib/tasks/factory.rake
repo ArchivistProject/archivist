@@ -4,15 +4,15 @@ namespace :factory do
   desc 'Add the system groupings'
   task system_groups: :environment do
     g = Grouping::Group.new(name: MetadataGroup::GENERIC)
-    g.rows << Grouping::Row.new(name: 'Title', type: MetadataFieldType::String::TYPE)
-    g.rows << Grouping::Row.new(name: 'Author', type: MetadataFieldType::String::TYPE)
-    g.rows << Grouping::Row.new(name: 'Date Added', type: MetadataFieldType::Date::TYPE)
-    g.rows << Grouping::Row.new(name: 'Date Published', type: MetadataFieldType::Date::TYPE)
-    g.rows << Grouping::Row.new(name: 'Item Size', type: MetadataFieldType::String::TYPE)
+    g.rows << Grouping::Row.new(name: 'Title', type: MetadataField::String::TYPE)
+    g.rows << Grouping::Row.new(name: 'Author', type: MetadataField::String::TYPE)
+    g.rows << Grouping::Row.new(name: 'Date Added', type: MetadataField::Date::TYPE)
+    g.rows << Grouping::Row.new(name: 'Date Published', type: MetadataField::Date::TYPE)
+    g.rows << Grouping::Row.new(name: 'Item Size', type: MetadataField::String::TYPE)
     g.save!
 
     g = Grouping::Group.new(name: MetadataGroup::WEB)
-    g.rows << Grouping::Row.new(name: 'URL', type: MetadataFieldType::String::TYPE)
+    g.rows << Grouping::Row.new(name: 'URL', type: MetadataField::String::TYPE)
     g.save!
   end
 

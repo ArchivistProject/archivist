@@ -11,11 +11,11 @@ class MetadataField < MongoidBase
   field :constant_after_upload, type: Boolean
 
   def string?
-    type == MetadataFieldType::String::TYPE
+    type == MetadataField::String::TYPE
   end
 
   def date?
-    type == MetadataFieldType::Date::TYPE
+    type == MetadataField::Date::TYPE
   end
 
   def self.create_new_field(new_type)
@@ -33,9 +33,9 @@ class MetadataField < MongoidBase
 
   #TODO: should be private
   def self.type_models
-    MetadataFieldType.constants.map do |c|
-      t = MetadataFieldType.const_get(c)
-      t if t.include? Mongoid::Document
+    MetadataField.constants.map do |c|
+      t = MetadataField.const_get(c)
+      t if t.to_s.starts_with?('MetadataField') && t.include?(Mongoid::Document)
     end.compact
   end
 
