@@ -23,10 +23,12 @@ module Archivist
     # -- all .rb files in that directory are automatically loaded.
     config.api_only = true
 
-    # TODO: update to be more safe
-    config.action_dispatch.default_headers = {
-      'Access-Control-Allow-Origin' => '*',
-      'Access-Control-Request-Method' => %w(GET POST PUT DELETE OPTIONS).join(',')
-    }
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        #TODO: Update to be more safe
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+      end
+    end
   end
 end
