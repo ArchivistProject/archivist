@@ -9,6 +9,6 @@ class Public::DocumentsController < ApplicationController
       group.add_field(name.to_s.sub('_', ' '), type, data)
     end
 
-    render json: { success: true }
+    render_success
   end
 end

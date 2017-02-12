@@ -16,12 +16,12 @@ class System::GroupsController < ApplicationController
   def update
     group.name = params[:name]
     group.save!
-    render json: { success: true }
+    render_success
   end
 
   def destroy
     group.destroy
-    render json: { success: true }
+    render_success
   end
 
   private
