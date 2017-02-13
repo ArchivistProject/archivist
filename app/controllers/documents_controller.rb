@@ -7,6 +7,19 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    render json: Document.find(params[:id])
+    render json: document
+  end
+
+  def update
+    attrs = params.require(:document).permit(:description, tags: [])
+
+    document.update_attributes(attrs[:description]) if attrs[:description]
+    document.update_tags attrs[:tags] if attrs[:tags]
+  end
+
+  private
+
+  def document
+    @document ||= Document.find(params[:id])
   end
 end
