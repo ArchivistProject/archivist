@@ -4,6 +4,8 @@ AllCops:
 
 Rails:
   Enabled: true
+Rails/HasAndBelongsToMany:
+  Enabled: false
 Metrics/LineLength:
   Enabled: false
 Style/ClassAndModuleChildren:
