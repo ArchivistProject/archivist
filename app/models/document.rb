@@ -1,8 +1,9 @@
 class Document < MongoidBase
+  include Taggable
+
   belongs_to :revision
 
   has_one :document_storage
-  has_one :tag_array
 
   has_many :notes
   has_many :metadata_groups, dependent: :destroy do
@@ -10,6 +11,8 @@ class Document < MongoidBase
       find_by(name: MetadataGroup::GENERIC)
     end
   end
+
+  field :description, type: String
 
   def add_group(name)
     group = MetadataGroup.new
