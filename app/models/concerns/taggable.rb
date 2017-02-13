@@ -11,10 +11,10 @@ module Taggable
 
   def update_tags(new_tags)
     current_tags = tag_names # to reduce the number of times we hit mongo
-    to_add    = new_tags.select { |t| !t.in? current_tags }
-    to_remove = current_tags.select { |t| !t.in? new_tags }
+    to_add    = new_tags - current_tags
+    to_remove = current_tags - new_tags
 
     to_add.each { |t| tags << Tag.where(name: t).first_or_create! }
-    to_remove.each { |t| tags.delete Tag.where(name: t).first }
+    to_remove.each { |t| tags.delete Tag.find_by(name: t) }
   end
 end
