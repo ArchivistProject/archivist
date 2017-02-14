@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :documents, only: [:index, :show, :update]
 
-  resources :metadata_fields do
+  resources :metadata_fields, only: [:update] do
     collection do
       get :types
     end
