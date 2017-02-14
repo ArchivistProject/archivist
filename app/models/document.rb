@@ -4,7 +4,6 @@ class Document < MongoidBase
   belongs_to :revision
 
   has_one :document_storage
-
   has_many :notes
   has_many :metadata_groups, dependent: :destroy do
     def generic
@@ -12,7 +11,7 @@ class Document < MongoidBase
     end
   end
 
-  field :description, type: String
+  field :description, type: String, default: ''
 
   def add_group(name)
     group = MetadataGroup.new

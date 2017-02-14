@@ -10,13 +10,22 @@ class DocumentsController < ApplicationController
     render json: document
   end
 
-  def update
-    attrs = params.require(:document).permit(:description, tags: [])
+  def show_description
+    render json: { document: { description: document.description } }
+  end
 
-    document.update_attributes(attrs.extract!(:description)) if attrs[:description]
-    document.update_tags attrs[:tags] if attrs[:tags]
+  def update_description
+    document.update_attributes(params.require(:document).permit(:description))
     render_success
   end
+
+  def show_tags
+    render json: { document: { tags: document.tag_names } }
+  end
+
+  def update_tags
+    document.update_tags params.require(:document).permit(tags: [])
+    render_success
   end
 
   private
