@@ -15,6 +15,8 @@ class DocumentsController < ApplicationController
 
     document.update_attributes(attrs.extract!(:description)) if attrs[:description]
     document.update_tags attrs[:tags] if attrs[:tags]
+    render_success
+  end
   end
 
   private
