@@ -13,7 +13,7 @@ class DocumentsController < ApplicationController
   def update
     attrs = params.require(:document).permit(:description, tags: [])
 
-    document.update_attributes(attrs[:description]) if attrs[:description]
+    document.update_attributes(attrs.extract!(:description)) if attrs[:description]
     document.update_tags attrs[:tags] if attrs[:tags]
   end
 
