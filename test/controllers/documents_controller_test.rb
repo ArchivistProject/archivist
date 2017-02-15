@@ -34,14 +34,21 @@ class DocumentsControllerTest < ActionDispatch::IntegrationTest
   test 'tags are added and deleted' do
     %w(foo bar bing bang).each { |t| Tag.where(name: t).destroy }
 
-    put document_url(@doc.id), params: { document: { tags: %w(bar foo) } }
+    put tags_document_url(@doc.id), params: { document: { tags: %w(bar foo), count: 2 } }
 
     assert_response :success
     assert_equal %w(bar foo), Document.find(@doc.id).tag_names.sort
 
-    put document_url(@doc.id), params: { document: { tags: %w(bar bing) } }
+    put tags_document_url(@doc.id), params: { document: { tags: %w(bar bing), count: 2 } }
 
     assert_response :success
     assert_equal %w(bar bing), Document.find(@doc.id).tag_names.sort
+  end
+
+  test 'send empty array to tags' do
+    put tags_document_url(@doc.id), params: { document: { tags: [], count: 0 } }
+
+    assert_response :success
+    assert_equal [], Document.find(@doc.id).tag_names
   end
 end

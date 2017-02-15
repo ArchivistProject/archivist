@@ -24,7 +24,9 @@ class DocumentsController < ApplicationController
   end
 
   def update_tags
-    document.update_tags(params.require(:document).permit(tags: []))
+    attrs = params.require(:document).permit(:count, tags: [])
+    tags = attrs[:count].to_s == 0.to_s ? [] : attrs[:tags]
+    document.update_tags(tags)
     render_success
   end
 
