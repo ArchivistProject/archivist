@@ -24,7 +24,7 @@ class DocumentsController < ApplicationController
   end
 
   def update_tags
-    document.update_tags params.require(:document).permit(tags: []))
+    document.update_tags(params.require(:document).permit(tags: []))
     render_success
   end
 
