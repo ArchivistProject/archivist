@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'bin/**'
+    - 'config/routes.rb'
 
 Rails:
   Enabled: true
