@@ -23,6 +23,14 @@ class Document < MongoidBase
     group
   end
 
+  def add_storage(data)
+    raise 'Data is already stored' unless file_storage.read.nil?
+
+    file_storage.file = data
+    file_storage.save!
+    save!
+  end
+
   def self.create_new_doc
     rev = Revision.new
     doc = rev.add_document
