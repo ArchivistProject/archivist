@@ -31,6 +31,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'mongoid', '~> 6.0.0'
+gem 'mongoid-grid_fs'
+
+gem 'carrierwave', '~> 0.11.2' #TODO: Update to version 1
+gem 'carrierwave-base64'
+gem 'carrierwave-mongoid', '~> 0.10.0', require: 'carrierwave/mongoid'
 
 gem 'active_model_serializers'
 
