@@ -21,6 +21,4 @@ RUN gem install bundler && \
 
 COPY . .
 
-RUN bundle exec rake assets:precompile
-
 CMD puma -C config/puma.rb

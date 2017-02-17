@@ -37,10 +37,10 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  #config.assets.debug = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  #config.assets.quiet = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
@@ -50,7 +50,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   if ENV['DOCKERIZED'] == 'true'
-    config.web_console.whitelisted_ips = '0.0.0.0/0' # all ip-addresses
+    #config.web_console.whitelisted_ips = '0.0.0.0/0' # all ip-addresses
     config.logger = ActiveSupport::Logger.new(STDOUT)
   end
 
