@@ -45,3 +45,5 @@ spring*
 
 # Rubocop stuff
 0*
+
+/public/uploads
