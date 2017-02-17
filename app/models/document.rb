@@ -3,7 +3,7 @@ class Document < MongoidBase
 
   belongs_to :revision
 
-  has_one :document_storage
+  has_one :file_storage, autobuild: true
   has_many :notes
   has_many :metadata_groups, dependent: :destroy do
     def generic
