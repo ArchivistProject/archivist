@@ -30,6 +30,10 @@ class DocumentsController < ApplicationController
     render_success
   end
 
+  def show_content
+    send_data document.file_storage.read, type: document.file_storage.content_type, disposition: "inline"
+  end
+
   private
 
   def document

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
       get :tags, to: 'documents#show_tags'
       put :tags, to: 'documents#update_tags'
+
+      get :content, to: 'documents#show_content'
     end
   end
 
