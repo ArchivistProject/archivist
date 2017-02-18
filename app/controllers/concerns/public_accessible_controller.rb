@@ -16,11 +16,9 @@ module PublicAccessibleController
     doc.update_tags(attrs[:tags].nil? ? [] : attrs[:tags])
 
     groups = attrs[:metadata_fields].group_by { |g| g[:group] }
-    groups.each do |group_name,fields|
+    groups.each do |group_name, fields|
       group = doc.add_group(group_name)
-      fields.each do |f|
-        group.add_field(f[:name], f[:type], f[:data])
-      end
+      fields.each { |f| group.add_field(f[:name], f[:type], f[:data]) }
     end
 
     render_success

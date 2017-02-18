@@ -57,7 +57,6 @@ namespace :factory do
     # Same as above
     doc.add_storage 'data:text/html;base64,(PCFET0NUWVBFIGh0bWw+CjxodG1sPgogIDxoZWFkPgogICAgPHRpdGxlPkhlbGxvIFdvcmxkITwvdGl0bGU+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPGgyPkhlcmUgSSBhbSE8L2gyPgogICAgPHA+Zm9vIGJhciBiaW5nIGJhbmc8L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==)'
 
-
     ('A'..'Z').each do |letter|
       doc = create_doc("Article #{letter}", "Sir #{letter}", Time.utc(2002, 10, 15, 0, 0, 0))
       html = "<html><head><title>Article by Sir #{letter}</title></head><body><h2>#{letter} is awesome!</h2></body></html>"

@@ -3,17 +3,7 @@ class FileStorage < MongoidBase
 
   mount_base64_uploader :file, ReadableUploader
 
-  def content_type
-    file.content_type
-  end
-
-  def size
-    file.size
-  end
-
-  def read
-    file.read
-  end
+  delegate :content_type, :size, :read, to: :file
 
   def html?
     content_type == 'text/html'
