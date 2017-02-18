@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   include PaginationController
+  include PublicAccessibleController
 
   def index
     docs = Document.all.paginate(page: params[:page], per_page: 10)
@@ -8,6 +9,10 @@ class DocumentsController < ApplicationController
 
   def show
     render json: document
+  end
+
+  def create
+    create_doc(params)
   end
 
   def show_description
