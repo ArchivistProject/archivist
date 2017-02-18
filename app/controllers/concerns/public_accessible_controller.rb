@@ -1,6 +1,10 @@
 module PublicAccessibleController
   extend ActiveSupport::Concern
 
+  def show_all_groups
+    render json: Grouping::Group.all, root: 'groups'
+  end
+
   def create_doc(params)
     attrs = params.require(:document).permit(:file, tags: [], metadata_fields: [:name, :type, :data, :group])
     doc = Document.create_new_doc

@@ -1,6 +1,8 @@
 class System::GroupsController < ApplicationController
+  include PublicAccessibleController
+
   def index
-    render json: Grouping::Group.all, root: 'groups'
+    show_all_groups
   end
 
   def show
