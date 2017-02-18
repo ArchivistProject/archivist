@@ -4,5 +4,10 @@ class MetadataFieldSerializer < ActiveModel::Serializer
   attributes :id,
              :name,
              :type,
-             :data
+             :data,
+             :group
+
+  def group
+    object.metadata_group.name
+  end
 end
