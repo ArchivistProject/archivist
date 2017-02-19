@@ -1,14 +1,8 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_request
 
-  def pagination_dict(object)
-    {
-      current_page: object.current_page,
-      next_page: object.next_page,
-      prev_page: object.previous_page,
-      total_pages: object.total_pages,
-      total_count: object.total_entries
-    }
+  def render_success
+    render json: { success: true }
   end
 
   private

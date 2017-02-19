@@ -1,5 +1,5 @@
 class MetadataField < MongoidBase
-  belongs_to :metadata_grouping
+  belongs_to :metadata_group
 
   after_initialize :update_type
 
@@ -11,20 +11,32 @@ class MetadataField < MongoidBase
   field :constant_after_upload, type: Boolean
 
   def string?
-    type == MetadataFieldType::String::TYPE
+    type == MetadataField::String::TYPE
   end
 
   def date?
-    type == MetadataFieldType::Date::TYPE
+    type == MetadataField::Date::TYPE
   end
 
-  def self.create_new_field(t)
-    case t
-    when MetadataFieldType::String::TYPE
-      MetadataFieldType::String.new
-    when MetadataFieldType::Date::TYPE
-      MetadataFieldType::Date.new
+  def self.create_new_field(new_type)
+    MetadataField.type_models.map do |t|
+      return t.new if new_type == t::TYPE
     end
+    raise 'Unkown MetadataField type: ' + new_type
+  end
+
+  def self.types
+    MetadataField.type_models.map do |t|
+      t::TYPE
+    end
+  end
+
+  #TODO: should be private
+  def self.type_models
+    MetadataField.constants.map do |c|
+      t = MetadataField.const_get(c)
+      t if t.to_s.starts_with?('MetadataField') && t.include?(Mongoid::Document)
+    end.compact
   end
 
   private

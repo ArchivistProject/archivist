@@ -1,7 +1,7 @@
 class Note < MongoidBase
-  belongs_to :document
+  include Taggable
 
-  has_many :tag_arrays
+  belongs_to :document
 
   field :color, type: String
   field :content, type: String
