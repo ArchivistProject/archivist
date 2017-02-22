@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    render json: document
+    render json: document, complete: true
   end
 
   def show_description
