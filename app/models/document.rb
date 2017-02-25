@@ -3,7 +3,7 @@ class Document < MongoidBase
 
   belongs_to :revision
 
-  has_one :document_storage
+  has_one :file_storage, autobuild: true
   has_many :notes
   has_many :metadata_groups, dependent: :destroy do
     def generic
@@ -21,6 +21,14 @@ class Document < MongoidBase
     save!
 
     group
+  end
+
+  def add_storage(data)
+    raise 'Data is already stored' unless file_storage.read.nil?
+
+    file_storage.file = data
+    file_storage.save!
+    save!
   end
 
   def self.create_new_doc
