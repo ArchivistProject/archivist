@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   include PaginationController
+  include PublicAccessibleController
 
   def index
     docs = Document.all.paginate(page: params[:page], per_page: 10)
@@ -8,6 +9,10 @@ class DocumentsController < ApplicationController
 
   def show
     render json: document, complete: true
+  end
+
+  def create
+    create_doc(params)
   end
 
   def show_description
@@ -28,6 +33,10 @@ class DocumentsController < ApplicationController
     tags = attrs[:count].to_s == 0.to_s ? [] : attrs[:tags]
     document.update_tags(tags)
     render_success
+  end
+
+  def show_content
+    send_data document.file_storage.read, type: document.file_storage.content_type, disposition: 'inline'
   end
 
   private
