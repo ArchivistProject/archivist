@@ -28,8 +28,8 @@ class DocumentsController < ApplicationController
   def search
     docs = Document
 
-    if !params[:item_type].nil?
-      doc_ids = MetadataGroup.where(name: params[:item_type]).pluck(:document)
+    if !params[:item_types].nil?
+      doc_ids = MetadataGroup.where(:name.in => params[:item_types]).pluck(:document)
       docs = docs.where(:id.in => doc_ids)
     end
 
