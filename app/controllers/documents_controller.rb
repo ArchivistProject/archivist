@@ -33,14 +33,17 @@ class DocumentsController < ApplicationController
       docs = docs.where(:id.in => doc_ids)
     end
 
-      names = params[:fields].keys
-      values = params[:fields]# hash of names to values
-      group_ids = []
-      fields = MetadataField.where(:name.in => names).each do |field|
-        group_ids << field.metadata_group_id if values[field.name] == field.value # add function for this in MetadataField to take care of the date
-      end
-      doc_ids = MetadataGroup.where(:id.in => group_ids).pluck(:document)
     unless params[:fields].nil?
+      #names = params[:fields].keys
+      #values = params[:fields]
+      #group_ids = []
+      #MetadataField.where(:name.in => names).each do |field|
+      #  group_ids << field.metadata_group_id if values[field.name] == field.value # add function for this in MetadataField to take care of the date
+      #end
+      f = MetadataField
+      params[:fields].each { |k,v| f = f.or(name: key, data: v) }
+
+      doc_ids = MetadataGroup.where(:id.in => f.pluck(:metadata_group)).pluck(:document)
       docs = docs.where(:id.in => doc_ids)
     end
 
