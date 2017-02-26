@@ -28,12 +28,11 @@ class DocumentsController < ApplicationController
   def search
     docs = Document
 
-    if !params[:item_types].nil?
+    unless params[:item_types].nil?
       doc_ids = MetadataGroup.where(:name.in => params[:item_types]).pluck(:document)
       docs = docs.where(:id.in => doc_ids)
     end
 
-    if !params[:fields].nil?
       names = params[:fields].keys
       values = params[:fields]# hash of names to values
       group_ids = []
@@ -41,15 +40,16 @@ class DocumentsController < ApplicationController
         group_ids << field.metadata_group_id if values[field.name] == field.value # add function for this in MetadataField to take care of the date
       end
       doc_ids = MetadataGroup.where(:id.in => group_ids).pluck(:document)
+    unless params[:fields].nil?
       docs = docs.where(:id.in => doc_ids)
     end
 
-    if !params[:tags].nil?
+    unless params[:tags].nil?
       doc_ids = Tag.where(:name.in => params[:tags]).pluck(:document)
       docs = docs.where(:id.in => doc_ids)
     end
 
-    if !params[:description].nil?
+    unless params[:description].nil?
       docs = docs.where(description: /#{params[:description]}/)
     end
 
