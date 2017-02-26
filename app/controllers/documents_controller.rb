@@ -8,11 +8,21 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    render json: document
+    render json: document, complete: true
   end
 
   def create
     create_doc(params)
+  end
+
+  def update
+    attrs = params.require(:document).permit(:description, :count, tags: [])
+    document.update_attributes(attrs.permit(:description))
+    # We need count passed in b/c otherwise when tags is empty no params get set
+    tags = attrs[:tags].nil? ? [] : attrs[:tags]
+    document.update_tags(tags) unless attrs[:count].nil? # without a count we aren't even atttempting to update the tags
+
+    render_success
   end
 
   def search
@@ -45,26 +55,6 @@ class DocumentsController < ApplicationController
 
     docs_to_show = docs.paginate(page: params[:page], per_page: 10)
     render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
-  end
-
-  def show_description
-    render json: { document: { description: document.description } }
-  end
-
-  def update_description
-    document.update_attributes(params.require(:document).permit(:description))
-    render_success
-  end
-
-  def show_tags
-    render json: { document: { tags: document.tag_names } }
-  end
-
-  def update_tags
-    attrs = params.require(:document).permit(:count, tags: [])
-    tags = attrs[:count].to_s == 0.to_s ? [] : attrs[:tags]
-    document.update_tags(tags)
-    render_success
   end
 
   def show_content
