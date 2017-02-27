@@ -15,8 +15,6 @@ class MetadataGroup < MongoidBase
     field.data = data
 
     metadata_fields << field
-    field.save!
-    save!
 
     field
   end

@@ -16,9 +16,8 @@ class Document < MongoidBase
   def add_group(name)
     group = MetadataGroup.new
     group.name = name
+
     metadata_groups << group
-    group.save!
-    save!
 
     group
   end
