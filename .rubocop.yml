@@ -7,6 +7,8 @@ Rails:
   Enabled: true
 Rails/HasAndBelongsToMany:
   Enabled: false
+Metrics/AbcSize:
+  Enabled: false
 Metrics/LineLength:
   Enabled: false
 Style/ClassAndModuleChildren:
@@ -15,3 +17,5 @@ Style/Documentation:
   Enabled: false
 Style/LeadingCommentSpace:
   Enabled: false
+Metrics/MethodLength:
+  Max: 15

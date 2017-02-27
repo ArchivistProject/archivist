@@ -1,6 +1,7 @@
 class MetadataGroup < MongoidBase
   GENERIC = 'Generic'.freeze
   WEB = 'Website'.freeze
+  SYSTEM_GROUPS = [GENERIC, WEB].freeze
 
   belongs_to :document
 
@@ -14,8 +15,6 @@ class MetadataGroup < MongoidBase
     field.data = data
 
     metadata_fields << field
-    field.save!
-    save!
 
     field
   end

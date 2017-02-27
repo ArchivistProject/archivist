@@ -5,6 +5,10 @@ class ApplicationController < ActionController::API
     render json: { success: true }
   end
 
+  def render_failure
+     render json: { success: false }, status: 400
+  end
+
   private
 
   def validate_token

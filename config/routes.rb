@@ -6,13 +6,9 @@ Rails.application.routes.draw do
     get :status
   end
 
-  resources :documents, only: [:index, :show] do
+  resources :documents, only: [:index, :show, :create, :update] do
     member do
-      get :description, to: 'documents#show_description'
-      put :description, to: 'documents#update_description'
-
-      get :tags, to: 'documents#show_tags'
-      put :tags, to: 'documents#update_tags'
+      get :content, to: 'documents#show_content'
     end
   end
 
@@ -23,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
+    resources :groups, only: [:index]
     resources :documents, only: [:create]
   end
 
