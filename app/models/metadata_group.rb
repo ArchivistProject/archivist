@@ -1,6 +1,7 @@
 class MetadataGroup < MongoidBase
   GENERIC = 'Generic'.freeze
   WEB = 'Website'.freeze
+  SYSTEM_GROUPS = [GENERIC, WEB].freeze
 
   belongs_to :document
 
