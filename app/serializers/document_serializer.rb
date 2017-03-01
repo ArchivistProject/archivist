@@ -17,6 +17,6 @@ class DocumentSerializer < ActiveModel::Serializer
   end
 
   def complete?
-    !!instance_options[:complete]
+    instance_options[:complete]
   end
 end
