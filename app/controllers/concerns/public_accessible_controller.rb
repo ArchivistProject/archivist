@@ -2,7 +2,7 @@ module PublicAccessibleController
   extend ActiveSupport::Concern
 
   def show_all_groups
-    render json: Grouping::Group.all, root: 'groups'
+    render json: Grouping::Group.all
   end
 
   def create_doc(params)
