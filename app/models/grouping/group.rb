@@ -11,4 +11,8 @@ class Grouping::Group < MongoidBase
       errors.add(:rows, 'All row names must be unique in a group')
     end
   end
+
+  def can_edit?
+    !name.in? MetadataGroup::SYSTEM_GROUPS
+  end
 end

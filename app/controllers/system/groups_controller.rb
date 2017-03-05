@@ -6,22 +6,24 @@ class System::GroupsController < ApplicationController
   end
 
   def show
-    render json: group, root: 'group'
+    render json: group
   end
 
   def create
     g = Grouping::Group.new(params.require(:group).permit(:name))
     g.save!
-    render json: g, root: 'group'
+    render json: g
   end
 
   def update
+    return render_failure unless group.can_edit?
     group.name = params[:name]
     group.save!
     render_success
   end
 
   def destroy
+    return render_failure unless group.can_edit?
     group.destroy
     render_success
   end
