@@ -29,7 +29,7 @@ class DocumentsController < ApplicationController
     docs = Document
 
     unless params[:item_types].nil?
-      doc_ids = MetadataGroup.where(:name.in => params[:item_types]).pluck(:document)
+      doc_ids = MetadataGroup.where(:name.in => params[:item_types]).pluck(:document_id)
       docs = docs.where(:id.in => doc_ids)
     end
 
@@ -43,12 +43,12 @@ class DocumentsController < ApplicationController
       f = MetadataField
       params[:fields].each { |k,v| f = f.or(name: key, data: v) }
 
-      doc_ids = MetadataGroup.where(:id.in => f.pluck(:metadata_group)).pluck(:document)
+      doc_ids = MetadataGroup.where(:id.in => f.pluck(:metadata_group_id)).pluck(:document_id)
       docs = docs.where(:id.in => doc_ids)
     end
 
     unless params[:tags].nil?
-      doc_ids = Tag.where(:name.in => params[:tags]).pluck(:document)
+      doc_ids = Tag.where(:name.in => params[:tags]).pluck(:document_ids).flatten.uniq
       docs = docs.where(:id.in => doc_ids)
     end
 
