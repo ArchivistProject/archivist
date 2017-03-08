@@ -23,7 +23,7 @@ class Statistics::DocumentsController < ApplicationController
     return Document.find(doc_id).file_storage.size if doc_id
 
     FileStorage.all.reduce(0) do |total_size, fs|
-      total_size += fs.size
+      total_size + fs.size
     end
   end
 end
