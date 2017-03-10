@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     member do
       get :content, to: 'documents#show_content'
     end
+
+    resources :notes, only: [:create, :update]
   end
 
   resources :metadata_fields, only: [:update] do
