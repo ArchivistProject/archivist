@@ -1,9 +1,14 @@
 class DocumentsController < ApplicationController
   include PaginationController
   include PublicAccessibleController
+  include AclController
+
+  before_action only: [:show, :show_content] { |c| verify(document, :be_seen?) }
+
+  before_action only: [:update] { |c| verify(document, :be_edited?) }
 
   def index
-    docs = Document.all.paginate(page: params[:page], per_page: 10)
+    docs = Document.owned_by(@current_user).paginate(page: params[:page], per_page: 10)
     render json: docs, meta: pagination_dict(docs)
   end
 

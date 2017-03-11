@@ -1,5 +1,6 @@
 class Document < MongoidBase
   include Taggable
+  include Acl
 
   belongs_to :revision
 

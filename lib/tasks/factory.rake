@@ -47,6 +47,7 @@ namespace :factory do
     #    <p>foo bar bing bang</p>
     #  </body>
     #</html>
+    doc.owner = 'foo@example.com'
     doc.add_storage 'data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sPgogIDxoZWFkPgogICAgPHRpdGxlPkhlbGxvIFdvcmxkITwvdGl0bGU+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPGgyPkhlcmUgSSBhbSE8L2gyPgogICAgPHA+Zm9vIGJhciBiaW5nIGJhbmc8L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg=='
 
     doc = create_doc('What a Time', 'Dr. Alive', Time.utc(2018, 5, 2, 0, 0, 0))
@@ -55,11 +56,13 @@ namespace :factory do
     group.add_field('FooBar 1', 'string', 'far 5')
     group.add_field('Moo 1', 'string', 'far 6')
     # Same as above
+    doc.owner = 'foo@example.com'
     doc.add_storage 'data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sPgogIDxoZWFkPgogICAgPHRpdGxlPkhlbGxvIFdvcmxkITwvdGl0bGU+CiAgPC9oZWFkPgogIDxib2R5PgogICAgPGgyPkhlcmUgSSBhbSE8L2gyPgogICAgPHA+Zm9vIGJhciBiaW5nIGJhbmc8L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg=='
 
     ('A'..'Z').each do |letter|
       doc = create_doc("Article #{letter}", "Sir #{letter}", Time.utc(2002, 10, 15, 0, 0, 0))
       html = "<html><head><title>Article by Sir #{letter}</title></head><body><h2>#{letter} is awesome!</h2></body></html>"
+      doc.owner = 'bar@example.com'
       doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
     end
   end
