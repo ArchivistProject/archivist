@@ -69,9 +69,9 @@ namespace :factory do
 
   desc 'Adds some sample users to the database'
   task sample_users: :environment do
-    User.create!(email: 'foo@example.com', password: 'foo', password_confirmation: 'foo')
-    User.create!(email: 'bar@example.com', password: 'bar', password_confirmation: 'bar')
-    User.create!(email: 'bing@example.com', password: 'bing', password_confirmation: 'bing')
-    User.create!(email: 'bang@example.com', password: 'bang', password_confirmation: 'bang')
+    User.create!(id: 'foo@example.com', email: 'foo@example.com', password: 'foo', password_confirmation: 'foo')
+    User.create!(id: 'bar@example.com', email: 'bar@example.com', password: 'bar', password_confirmation: 'bar')
+    User.create!(id: 'bing@example.com', email: 'bing@example.com', password: 'bing', password_confirmation: 'bing')
+    User.create!(id: 'bang@example.com', email: 'bang@example.com', password: 'bang', password_confirmation: 'bang')
   end
 end
