@@ -3,7 +3,9 @@ class DocumentsController < ApplicationController
   include PublicAccessibleController
 
   def index
-    docs = Document.all.paginate(page: params[:page], per_page: 10)
+    s = Setting.global
+
+    docs = Document.all.paginate(page: params[:page], per_page: s.docs_per_page)
     render json: docs, meta: pagination_dict(docs)
   end
 
