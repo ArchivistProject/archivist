@@ -3,8 +3,6 @@ module Acl
 
   included do
     field :owner, type: String
-    field :acl_see, type: Boolean
-    field :acl_edit, type: Boolean
 
     scope :owned_by, ->(user) { where(owner: user.email) }
   end
