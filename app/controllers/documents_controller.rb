@@ -8,7 +8,8 @@ class DocumentsController < ApplicationController
   before_action only: [:update] { |c| verify(document, :be_edited?) }
 
   def index
-    docs = Document.owned_by(@current_user).paginate(page: params[:page], per_page: 10)
+    s = Setting.global
+    docs = Document.owned_by(@current_user).paginate(page: params[:page], per_page: s.docs_per_page)
     render json: docs, meta: pagination_dict(docs)
   end
 

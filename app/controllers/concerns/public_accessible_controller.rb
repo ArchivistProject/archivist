@@ -6,8 +6,10 @@ module PublicAccessibleController
   end
 
   def create_doc(params)
-    attrs = params.require(:document).permit(:file, tags: [], metadata_fields: [:name, :type, :data, :group])
+    attrs = params.require(:document).permit(:file, :description, tags: [], metadata_fields: [:name, :type, :data, :group])
     doc = Document.create_new_doc
+
+    doc.update_attribute(:description, attrs[:description] || '')
 
     #FORMAT: data:application/pdf;base64,%s
     doc.add_storage attrs[:file]

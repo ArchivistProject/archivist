@@ -42,5 +42,6 @@ Rails.application.routes.draw do
     resources :groups, only: [:index, :show, :create, :update, :destroy] do
       resources :field, only: [:create, :update, :destroy]
     end
+    resources :settings, only: [:index, :update]
   end
 end

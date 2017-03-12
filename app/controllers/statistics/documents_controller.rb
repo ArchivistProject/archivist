@@ -19,9 +19,11 @@ class Statistics::DocumentsController < ApplicationController
     0
   end
 
-  def docs_size(doc = nil)
-    # TODO: Add in
-    return 100 unless doc
-    doc
+  def docs_size(doc_id = nil)
+    return Document.find(doc_id).file_storage.size if doc_id
+
+    FileStorage.all.reduce(0) do |total_size, fs|
+      total_size + fs.size
+    end
   end
 end
