@@ -9,7 +9,8 @@ class DocumentsController < ApplicationController
 
   def index
     s = Setting.global
-    docs = Document.owned_by(@current_user).paginate(page: params[:page], per_page: s.docs_per_page)
+    #docs = Document.owned_by(@current_user).paginate(page: params[:page], per_page: s.docs_per_page)
+    docs = Document.all.paginate(page: params[:page], per_page: s.docs_per_page)
     render json: docs, meta: pagination_dict(docs)
   end
 

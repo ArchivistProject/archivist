@@ -12,7 +12,7 @@ module Acl
   end
 
   def be_seen?(user)
-    is_owner? user
+    true
   end
 
   def be_edited?(user)
