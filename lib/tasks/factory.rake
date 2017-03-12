@@ -12,7 +12,7 @@ namespace :factory do
     g.save!
 
     g = Grouping::Group.new(name: MetadataGroup::WEB)
-    g.rows << Grouping::Row.new(name: 'URL', type: MetadataField::String::TYPE)
+    g.rows << Grouping::Row.new(name: 'URL', type: MetadataField::Url::TYPE)
     g.save!
   end
 
