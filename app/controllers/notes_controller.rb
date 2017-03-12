@@ -1,10 +1,16 @@
 class NotesController < ApplicationController
+  include AclController
+
+  before_action only: [:update, :update] { |c| verify(document, :be_edited?) }
+
   def create
     document.notes.create! params.require(:note).permit!
+    render_success
   end
 
   def update
     note.update_attributes params.require(:note).permit!
+    render_success
   end
 
   private

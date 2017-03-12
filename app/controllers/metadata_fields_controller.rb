@@ -1,6 +1,10 @@
 class MetadataFieldsController < ApplicationController
+  include AclController
+
+  before_action only: [:update] { |c| verify(metadata_field.metadata_group.document, :be_edited?) }
+
   def update
-    metadata_field.update_attributes(params.require(:metadata_field).permit(:data))
+    metadata_field.update_attributes(params.require(:metadata_field).permit!)
     render_success
   end
 
