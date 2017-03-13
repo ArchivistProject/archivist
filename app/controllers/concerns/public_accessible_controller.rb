@@ -5,9 +5,11 @@ module PublicAccessibleController
     render json: Grouping::Group.all
   end
 
-  def create_doc(params)
+  def create_doc(params, user)
     attrs = params.require(:document).permit(:file, :description, tags: [], metadata_fields: [:name, :type, :data, :group])
     doc = Document.create_new_doc
+
+    doc.owner = user.email
 
     doc.update_attribute(:description, attrs[:description] || '')
 

@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    create_doc(params)
+    create_doc(params, @current_user)
   end
 
   def update
