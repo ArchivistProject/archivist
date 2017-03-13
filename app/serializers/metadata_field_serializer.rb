@@ -5,14 +5,9 @@ class MetadataFieldSerializer < ActiveModel::Serializer
              :name,
              :type,
              :data,
-             :group,
-             :group_id
+             :group
 
   def group
     object.metadata_group.name
-  end
-
-  def group_id
-    object.metadata_group.id
   end
 end
