@@ -2,7 +2,7 @@ module Acl
   extend ActiveSupport::Concern
 
   included do
-    field :owner, type: String
+    field :owner, type: String, default: 'foo@example.com'
 
     scope :owned_by, ->(user) { where(owner: user.email) }
   end
