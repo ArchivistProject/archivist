@@ -24,8 +24,22 @@ class ApplicationController < ActionController::API
     nil
   end
 
+  def validate_api_key
+    authorization = request.headers['Authorization']
+    return nil unless authorization.present?
+
+    User.find_by(api_key: authorization)
+  rescue
+    nil
+  end
+
   def authenticate_request
     @current_user = validate_token
     return render json: { error: 'Invalid token' }, status: 401 if @current_user.nil?
+  end
+
+  def authenticate_api_key
+    @current_user = validate_api_key
+    return render json: { error: 'Invalid api key' }, status: 401 if @current_user.nil?
   end
 end
