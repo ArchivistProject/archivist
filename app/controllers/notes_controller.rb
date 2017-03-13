@@ -4,12 +4,12 @@ class NotesController < ApplicationController
   before_action only: [:update, :update] { |c| verify(document, :be_edited?) }
 
   def create
-    document.notes.create! params.require(:note).permit!
+    document.notes.create! params.require(:note).permit(:content, :color)
     render_success
   end
 
   def update
-    note.update_attributes params.require(:note).permit!
+    note.update_attributes params.require(:note).permit(:content, :color)
     render_success
   end
 

@@ -4,7 +4,7 @@ class MetadataFieldsController < ApplicationController
   before_action only: [:update] { |c| verify(metadata_field.metadata_group.document, :be_edited?) }
 
   def update
-    metadata_field.update_attributes(params.require(:metadata_field).permit!)
+    metadata_field.update_attributes(params.require(:metadata_field).permit(:data))
     render_success
   end
 
