@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :documents, only: [:index, :show, :create, :update] do
     collection do
-      get :search
+      post :search, to: 'documents_search#search'
     end
 
     member do
