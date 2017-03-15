@@ -1,7 +1,7 @@
 class User < MongoidBase
   include ActiveModel::SecurePassword
 
-  before_create :generate_api_key
+  #before_create :generate_api_key
 
   field :name, type: String
   field :email, type: String
