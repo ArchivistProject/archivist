@@ -6,6 +6,6 @@ class MongoidBase
   end
 
   def self.pluck_from(model_id, *to_pluck)
-    self.where(id: model_id).pluck(*to_pluck).first
+    where(id: model_id).pluck(*to_pluck).first
   end
 end
