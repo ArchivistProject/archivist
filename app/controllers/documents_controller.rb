@@ -25,41 +25,6 @@ class DocumentsController < ApplicationController
     render_success
   end
 
-  def search
-    docs = Document
-
-    unless params[:item_types].nil?
-      doc_ids = MetadataGroup.where(:name.in => params[:item_types]).pluck(:document_id)
-      docs = docs.where(:id.in => doc_ids)
-    end
-
-    unless params[:fields].nil?
-      #names = params[:fields].keys
-      #values = params[:fields]
-      #group_ids = []
-      #MetadataField.where(:name.in => names).each do |field|
-      #  group_ids << field.metadata_group_id if values[field.name] == field.value # add function for this in MetadataField to take care of the date
-      #end
-      f = MetadataField
-      params[:fields].each { |k,v| f = f.or(name: key, data: v) }
-
-      doc_ids = MetadataGroup.where(:id.in => f.pluck(:metadata_group_id)).pluck(:document_id)
-      docs = docs.where(:id.in => doc_ids)
-    end
-
-    unless params[:tags].nil?
-      doc_ids = Tag.where(:name.in => params[:tags]).pluck(:document_ids).flatten.uniq
-      docs = docs.where(:id.in => doc_ids)
-    end
-
-    unless params[:description].nil?
-      docs = docs.where(description: /#{params[:description]}/)
-    end
-
-    docs_to_show = docs.paginate(page: params[:page], per_page: 10)
-    render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
-  end
-
   def show_content
     send_data document.file_storage.read, type: document.file_storage.content_type, disposition: 'inline'
   end
