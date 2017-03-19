@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  namespace :authentication do
+    post :login
+    get :status
+  end
+
   resources :documents, only: [:index, :show, :create, :update] do
     member do
       get :content, to: 'documents#show_content'
     end
+
+    resources :notes, only: [:create, :update]
   end
 
   resources :metadata_fields, only: [:update] do

@@ -1,6 +1,9 @@
 require 'rake'
 
 namespace :factory do
+  desc 'Create full suite of sample data'
+  task all: [:sample_users, :system_groups, :simple_docs]
+
   desc 'Add the system groupings'
   task system_groups: :environment do
     g = Grouping::Group.new(name: MetadataGroup::GENERIC)
@@ -62,5 +65,13 @@ namespace :factory do
       html = "<html><head><title>Article by Sir #{letter}</title></head><body><h2>#{letter} is awesome!</h2></body></html>"
       doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
     end
+  end
+
+  desc 'Adds some sample users to the database'
+  task sample_users: :environment do
+    User.create!(email: 'foo@example.com', password: 'foo', password_confirmation: 'foo')
+    User.create!(email: 'bar@example.com', password: 'bar', password_confirmation: 'bar')
+    User.create!(email: 'bing@example.com', password: 'bing', password_confirmation: 'bing')
+    User.create!(email: 'bang@example.com', password: 'bang', password_confirmation: 'bang')
   end
 end

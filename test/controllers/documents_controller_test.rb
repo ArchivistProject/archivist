@@ -21,7 +21,7 @@ class DocumentsControllerTest < ActionDispatch::IntegrationTest
     group.add_field('ZigZag 2', 'string', 'some value 4')
     group.add_field('FooBar 2', 'string', 'some value 5')
 
-    get document_url(@doc.id)
+    get document_url(@doc.id), headers: http_login
 
     assert_response :success
     fields = ActiveSupport::JSON.decode(@response.body)['document']['metadata_fields']
@@ -34,19 +34,19 @@ class DocumentsControllerTest < ActionDispatch::IntegrationTest
   test 'tags are added and deleted' do
     %w(foo bar bing bang).each { |t| Tag.where(name: t).destroy }
 
-    put document_url(@doc.id), params: { document: { tags: %w(bar foo), count: 2 } }
+    put document_url(@doc.id), params: { document: { tags: %w(bar foo), count: 2 } }, headers: http_login
 
     assert_response :success
     assert_equal %w(bar foo), Document.find(@doc.id).tag_names.sort
 
-    put document_url(@doc.id), params: { document: { tags: %w(bar bing), count: 2 } }
+    put document_url(@doc.id), params: { document: { tags: %w(bar bing), count: 2 } }, headers: http_login
 
     assert_response :success
     assert_equal %w(bar bing), Document.find(@doc.id).tag_names.sort
   end
 
   test 'send empty array to tags' do
-    put document_url(@doc.id), params: { document: { tags: [], count: 0 } }
+    put document_url(@doc.id), params: { document: { tags: [], count: 0 } }, headers: http_login
 
     assert_response :success
     assert_equal [], Document.find(@doc.id).tag_names
