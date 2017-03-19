@@ -6,12 +6,18 @@ class DocumentsSearchController < ApplicationController
   include PaginationController
 
   def search
-    #params = params.permit(search: [:groupType, :andOr, :not]) # TODO: finish
-    return render_failure if params[:search].nil?
+    attrs = params.permit(:page, search: [:groupType, :andOr, :not,
+      :description,
+      fields: [:data, :group, :name, :type],
+      tags: [],
+      item_types: [],
+    ])
+    return render_failure if attrs[:search].nil?
+
 
     # NOTE: pretty sure sorting doesn't help at all in the current form
     # TODO: accumulate nin doc ids as to not reuse them in search?
-    docs_query = params[:search].inject(Document) do |query, c|
+    docs_query = attrs[:search].inject(Document) do |query, c|
       case c[:groupType]
       when ITEM_TYPES
         search_item_types(query, c[:item_types], c[:andOr], c[:not])
@@ -26,7 +32,7 @@ class DocumentsSearchController < ApplicationController
       end
     end
     p docs_query
-    docs_to_show = docs_query.paginate(page: params[:page], per_page: 10)
+    docs_to_show = docs_query.paginate(page: attrs[:page], per_page: 10)
     render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
   end
 
