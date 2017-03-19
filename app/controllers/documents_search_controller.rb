@@ -7,8 +7,7 @@ class DocumentsSearchController < ApplicationController
 
   def search
     #params = params.permit(search: [:groupType, :andOr, :not]) # TODO: finish
-    p params
-    render_failure if params[:search].nil? || params[:search].empty?
+    return render_failure if params[:search].nil?
 
     # NOTE: pretty sure sorting doesn't help at all in the current form
     # TODO: accumulate nin doc ids as to not reuse them in search?
