@@ -86,7 +86,7 @@ class DocumentsSearchController < ApplicationController
   end
 
   def id(inverse)
-    return :id.in if inverse == 'false'
+    return :id.in if inverse == 'false' || inverse == false
     :id.nin
   end
 end
