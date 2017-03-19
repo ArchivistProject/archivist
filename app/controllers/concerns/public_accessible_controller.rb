@@ -6,12 +6,11 @@ module PublicAccessibleController
   end
 
   def create_doc(params)
-    attrs = params.require(:document).permit(:file, tags: [], metadata_fields: [:name, :type, :data, :group])
+    attrs = params.require(:document).permit(:file, :description, tags: [], metadata_fields: [:name, :type, :data, :group])
     doc = Document.create_new_doc
 
-    #FORMAT: data:application/pdf;base64,%s
-    doc.add_storage attrs[:file]
-
+    doc.update_attribute(:description, attrs[:description] || '')
+    doc.add_storage(attrs[:file]) # FORMAT: EG: data:application/pdf;base64,%s
     doc.update_tags(attrs[:tags].nil? ? [] : attrs[:tags])
 
     attrs[:metadata_fields].group_by { |g| g[:group] }.each do |group_name, fields|

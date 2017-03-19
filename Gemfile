@@ -8,8 +8,8 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 2.5'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'mongoid', '~> 6.0.0'
 gem 'mongoid-grid_fs'
@@ -23,7 +23,8 @@ gem 'active_model_serializers'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate_mongoid'
 
-gem 'rack-cors', require: 'rack/cors'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

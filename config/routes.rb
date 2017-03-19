@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  namespace :authentication do
+    post :login
+    get :status
+  end
+
   resources :documents, only: [:index, :show, :create, :update] do
     collection do
       post :search, to: 'documents_search#search'
@@ -9,6 +14,8 @@ Rails.application.routes.draw do
     member do
       get :content, to: 'documents#show_content'
     end
+
+    resources :notes, only: [:create, :update]
   end
 
   resources :metadata_fields, only: [:update] do
@@ -39,5 +46,6 @@ Rails.application.routes.draw do
     resources :groups, only: [:index, :show, :create, :update, :destroy] do
       resources :field, only: [:create, :update, :destroy]
     end
+    resources :settings, only: [:index, :update]
   end
 end
