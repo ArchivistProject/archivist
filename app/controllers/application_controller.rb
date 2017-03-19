@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_failure
-     render json: { success: false }, status: 400
+    render json: { success: false }, status: 400
   end
 
   private
