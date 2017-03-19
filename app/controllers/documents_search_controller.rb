@@ -58,7 +58,7 @@ class DocumentsSearchController < ApplicationController
     # TODO: And really wants to start at the group first rather than the fields
 
     # Not getting type b/c that is in the fields sent down
-    q = fields.inject(MetadataField) { |a, e| a.or(e.extract!(:name, :type)) }
+    q = fields.inject(MetadataField) { |a, e| a.or(e.slice(:name, :type)) }
     all_fields = q.pluck(:id, :name, :data, :metadata_group_id).map do |f|
       f[0..-2] + MetadataGroup.pluck_from(f[-1], :name, :document_id)
     end
