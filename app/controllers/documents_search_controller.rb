@@ -68,7 +68,7 @@ class DocumentsSearchController < ApplicationController
       # There should not be any duplicate group_name or 'Any' in fields_by_name[:name]
       m = fields_by_name[name].find { |e| e[:group].in? [group_name, 'Any'] }
       next false if m.nil?
-      data_matches? m[:data], data, m[:type] # return true/false
+      MetadataField.data_matches? m[:data], data, m[:type] # return true/false
     end.compact
 
     if and_or == 'and'
