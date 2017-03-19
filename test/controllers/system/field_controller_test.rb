@@ -15,7 +15,7 @@ class FieldControllerTest < ActionDispatch::IntegrationTest
     @group.rows << row1 << row2
     @group.save!
 
-    delete system_group_field_path(@group.id, row1.id)
+    delete system_group_field_path(@group.id, row1.id), headers: http_login
 
     assert_response :success
     assert_equal 1, Grouping::Group.find(@group.id).rows.size
