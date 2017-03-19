@@ -44,9 +44,13 @@ class DocumentsSearchController < ApplicationController
   end
 
   def search_item_types(docs, item_types, and_or, inverse)
-    ds = MetadataGroup.where(:name.in => item_types).pluck(:document_ids)
+    ds = MetadataGroup.where(:name.in => item_types).pluck(:document_id)
     if and_or == 'and'
-      doc_ids = ds.inject { |a, e| Set.new(a) & Set.new(e) }.to_a # intersection
+      doc_ids = ds.group_by { |v| v }.map do |document_id,groups|
+        # Skip if document doesn't have all the groups
+        next nil if groups.size != item_types.size
+        document_id
+      end.compact
     elsif and_or == 'or' # else?
       doc_ids = ds.flatten.uniq
     end
