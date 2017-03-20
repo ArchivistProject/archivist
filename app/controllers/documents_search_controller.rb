@@ -20,7 +20,7 @@ class DocumentsSearchController < ApplicationController
 
     docs_query = build_query attrs
     logger.debug docs_query
-    
+
     docs_to_show = docs_query.paginate(page: attrs[:page], per_page: 10)
     render json: docs_to_show, meta: pagination_dict(docs_to_show)
   end
@@ -94,11 +94,11 @@ class DocumentsSearchController < ApplicationController
     end.compact
 
     if and_or == 'and'
-      common_doc_ids = matching_fields.inject do |i, j|
-        Set.new([i[-1]]) & Set.new([j[-1]]) # TODO: short circuit on i if it has no elements?
-      end
-
-      doc_ids = matching_fields.map { |f| f[-1] if f[-1].in? common_doc_ids }.compact
+      doc_ids = matching_fields.group_by { |v| v[-1] }.map do |document_id, f|
+        # Skip if document doesn't have all the fields
+        next nil if f.size != fields.size
+        document_id
+      end.compact
     elsif and_or == 'or'
       doc_ids = matching_fields.map { |f| f[-1] }
     end
