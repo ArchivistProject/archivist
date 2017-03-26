@@ -21,7 +21,7 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
       s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a b c))
     ] }
 
-    post search_documents_url, params: query
+    post search_documents_url, params: query, headers: http_login
 
     check_ids @doc[0..1]
 
@@ -30,7 +30,7 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
       s(DocumentsSearchController::TAGS, 'or', true, tags: %w(d))
     ] }
 
-    post search_documents_url, params: query
+    post search_documents_url, params: query, headers: http_login
 
     check_ids @doc[1..1]
   end
@@ -41,11 +41,11 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
     p docs
     s1 = Set.new(ActiveSupport::JSON.decode(@response.body)['documents'].map { |d| d['id'] })
     s2 = Set.new(docs.map(&:id))
-    p s1
     assert_equal docs.size, (s1 & s2).size
   end
 
-  def create_doc(tags = [])
+  def create_doc(tags: [])
+    p tags
     d = Document.create_new_doc
     d.update_tags tags
     d.save!
