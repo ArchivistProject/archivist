@@ -3,6 +3,9 @@ class FileStorage < MongoidBase
 
   mount_base64_uploader :file, ReadableUploader
 
+  field :fulltext, type: String, default: ''
+  index({fulltext: 'text'})
+
   delegate :content_type, :size, :read, to: :file
 
   def html?

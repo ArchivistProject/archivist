@@ -26,6 +26,25 @@ class Document < MongoidBase
     raise 'Data is already stored' unless file_storage.read.nil?
 
     file_storage.file = data
+    if file_storage.pdf?
+      reader = PDF::Reader.new(StringIO.new(file_storage.read))
+      text = reader.pages.inject("") { |a,e| a + e.text }
+      #text = ""
+      #reader.pages.each do |page|
+      #  p page.text
+      #end
+    elsif file_storage.html?
+      html = file_storage.read
+      text = Sanitize.fragment(html, :remove_contents => ['style'])
+    end
+    t = text.split("\n").map(&:strip).collect do |line|
+      p line
+      p line.split(/\W+/)
+      line.split(/\W+/).join(" ")
+    end.select { |f| f != "" }.join("\n")
+    #puts t
+    file_storage.fulltext = t
+
     file_storage.save!
     save!
   end
