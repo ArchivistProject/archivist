@@ -22,7 +22,7 @@ class DocumentsSearchController < ApplicationController
     logger.debug docs_query
 
     docs_to_show = docs_query.paginate(page: attrs[:page], per_page: 10)
-    render json: docs_to_show, meta: pagination_dict(docs_to_show)
+    render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
   end
 
   private
