@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   end
 
   resources :documents, only: [:index, :show, :create, :update] do
+    collection do
+      post :search, to: 'documents_search#search'
+    end
+
     member do
       get :content, to: 'documents#show_content'
     end

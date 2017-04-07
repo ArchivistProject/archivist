@@ -18,6 +18,15 @@ class MetadataField < MongoidBase
     type == MetadataField::Date::TYPE
   end
 
+  def self.data_matches?(data1, data2, type)
+    case type
+    when MetadataField::String::TYPE
+      data1 == data2
+    when MetadataField::Date::TYPE
+      data1 == data2
+    end
+  end
+
   def self.create_new_field(new_type)
     MetadataField.type_models.map do |t|
       return t.new if new_type == t::TYPE

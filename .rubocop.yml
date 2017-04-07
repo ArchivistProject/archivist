@@ -19,3 +19,7 @@ Style/LeadingCommentSpace:
   Enabled: false
 Metrics/MethodLength:
   Max: 20
+
+Style/IndentArray:
+  Exclude:
+    - 'test/controllers/documents_search_controller_test.rb'
