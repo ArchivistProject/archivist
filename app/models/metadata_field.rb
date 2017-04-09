@@ -2,6 +2,8 @@ class MetadataField < MongoidBase
   belongs_to :metadata_group
 
   after_initialize :update_type
+  after_create :update_search_fields
+  after_update :update_search_fields
 
   field :name,                  type: String
   field :type,                  type: String
@@ -54,5 +56,13 @@ class MetadataField < MongoidBase
     return unless new_record?
     raise 'Must be instantiated in a specific type' if self.class == MetadataField
     self.type ||= self.class::TYPE
+  end
+
+  def update_search_fields
+    # TODO: limit this to only certain fields defined on the frontend
+    doc_id = MetadataGroup.pluck_from(metadata_group_id, :document_id)
+    doc = Document.find(doc_id)
+    doc.search_fields[name] = data #TODO: convert data?
+    doc.save!
   end
 end

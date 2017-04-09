@@ -5,8 +5,21 @@ class DocumentsController < ApplicationController
   def index
     s = Setting.global
 
-    docs = Document.all.paginate(page: params[:page], per_page: s.docs_per_page)
-    render json: docs, meta: pagination_dict(docs)
+    docs = Document.all
+    if params[:sort_column] && params[:sort_order]
+      order = case params[:sort_order]
+              when 'ascending'
+                :asc
+              when 'descending'
+                :desc
+              else
+                raise 'Unknown sort order'
+              end
+      docs = docs.sort("search_fields.#{params[:sort_column]}" => order)
+    end
+
+    paged_docs = docs.paginate(page: params[:page], per_page: s.docs_per_page)
+    render json: paged_docs, meta: pagination_dict(paged_docs)
   end
 
   def show
