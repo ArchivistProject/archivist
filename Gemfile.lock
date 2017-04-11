@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    Ascii85 (1.0.2)
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
       nio4r (~> 1.2)
@@ -43,7 +42,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    afm (0.2.2)
     arel (7.1.4)
     ast (2.3.0)
     bcrypt (3.1.11)
@@ -70,7 +68,6 @@ GEM
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    hashery (2.1.2)
     i18n (0.7.0)
     json (1.8.3)
     jsonapi (0.1.1.beta2)
@@ -105,12 +102,6 @@ GEM
       nokogiri
     parser (2.3.1.4)
       ast (~> 2.2)
-    pdf-reader (2.0.0)
-      Ascii85 (~> 1.0.0)
-      afm (~> 0.2.1)
-      hashery (~> 2.0)
-      ruby-rc4
-      ttfunk
     powerpack (0.1.1)
     puma (3.6.0)
     rack (2.0.1)
@@ -152,7 +143,6 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
-    ruby-rc4 (0.1.5)
     sanitize (4.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
@@ -171,7 +161,6 @@ GEM
       sprockets (>= 3.0.0)
     thor (0.19.1)
     thread_safe (0.3.5)
-    ttfunk (1.5.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (1.1.1)
@@ -198,7 +187,6 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mongoid (~> 6.0.0)
   mongoid-grid_fs
-  pdf-reader
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
