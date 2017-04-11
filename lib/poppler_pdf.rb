@@ -6,9 +6,9 @@ class PopplerPDF
       temp_out = Tempfile.new([tid, '.txt'])
       temp_in.binmode
       temp_in.write(pdf_data)
-      puts "COMMAND: pdftotext -raw #{temp_in.path} #{temp_out.path}"
+      #puts "COMMAND: pdftotext -raw #{temp_in.path} #{temp_out.path}"
       system "pdftotext -raw #{temp_in.path} #{temp_out.path}"
-      if $?.exitstatus > 0
+      if $CHILD_STATUS.exitstatus > 0
         raise 'Something went wrong with pdf to text conversion'
       end
       raw_text = temp_out.read

@@ -31,11 +31,13 @@ class Document < MongoidBase
       text = PopplerPDF.get_text(pdf)
     elsif file_storage.html?
       html = file_storage.read
-      text = Sanitize.fragment(html, :remove_contents => ['style', 'script'])
+      text = Sanitize.fragment(html, remove_contents: %w(style script))
     end
+    # TODO: revist formatting
     t = text.split("\n").map(&:strip).collect do |line|
-      line.split(/\W+/).join(" ")
-    end.select { |f| f != "" }.join(" ")
+      line.split(/\W+/).join(' ')
+    end
+    t = t.select { |f| f != '' }.join(' ')
     #puts t
     file_storage.fulltext = t
 
