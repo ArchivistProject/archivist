@@ -2,7 +2,7 @@ require 'rake'
 
 namespace :factory do
   desc 'Create full suite of sample data'
-  task all: [:sample_users, :system_groups, :simple_docs]
+  task all: ['db:reset', :sample_users, :system_groups, :simple_docs]
 
   desc 'Add the system groupings'
   task system_groups: :environment do
