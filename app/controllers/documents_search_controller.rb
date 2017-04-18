@@ -50,7 +50,7 @@ class DocumentsSearchController < ApplicationController
         doc_ids = FileStorage.text_search(c[:terms]).pluck(:document_id) #TODO: Move FileStorage into the document?
         query.and(:id.in => doc_ids)
       else
-        raise 'horrible error!'
+        raise 'Unknown search field'
       end
     end
   end
