@@ -62,7 +62,18 @@ class MetadataField < MongoidBase
     # TODO: limit this to only certain fields defined on the frontend
     doc_id = MetadataGroup.pluck_from(metadata_group_id, :document_id)
     doc = Document.find(doc_id)
-    doc.search_fields[name] = data.downcase #TODO: convert data?
+    doc.search_fields[name] = search_data #TODO: convert data?
     doc.save!
+  end
+
+  def search_data
+    return nil if data.nil?
+
+    case type
+    when MetadataField::STRING::TYPE
+      data.downcase
+    else
+      data
+    end
   end
 end
