@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
               else
                 raise 'Unknown sort order'
               end
-      docs = docs.sort("search_fields.#{params[:sort_column]}" => order)
+      docs = docs.order("search_fields.#{params[:sort_column]}" => order)
     end
 
     paged_docs = docs.paginate(page: params[:page], per_page: s.docs_per_page)
