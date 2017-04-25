@@ -70,7 +70,7 @@ class MetadataField < MongoidBase
     return nil if data.nil?
 
     case type
-    when MetadataField::STRING::TYPE
+    when MetadataField::String::TYPE
       data.downcase
     else
       data
