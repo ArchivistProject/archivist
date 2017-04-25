@@ -12,6 +12,7 @@ class DocumentsSearchController < ApplicationController
       search: [
         :groupType, :andOr, :not,
         :description,
+        :terms,
         fields: [:data, :group, :name, :type],
         tags: [],
         item_types: []
