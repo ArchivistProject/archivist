@@ -17,13 +17,11 @@ class DocumentsSearchController < ApplicationController
       ]
     )
     return render_failure if attrs[:search].nil?
-    
-    s = Setting.global
 
     docs_query = build_query attrs
     logger.debug docs_query
 
-    docs_to_show = docs_query.paginate(page: attrs[:page], per_page: s.docs_per_page)
+    docs_to_show = docs_query.paginate(page: attrs[:page], per_page: 10)
     render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
   end
 
