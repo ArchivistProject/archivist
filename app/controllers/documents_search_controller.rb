@@ -17,7 +17,7 @@ class DocumentsSearchController < ApplicationController
       ]
     )
     return render_failure if attrs[:search].nil?
-    
+
     s = Setting.global
 
     docs_query = build_query attrs
