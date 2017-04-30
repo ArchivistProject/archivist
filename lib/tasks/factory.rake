@@ -65,6 +65,16 @@ namespace :factory do
       html = "<html><head><title>Article by Sir #{letter}</title></head><body><h2>#{letter} is awesome!</h2></body></html>"
       doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
     end
+
+    doc = create_doc('TEST A', 'TEST B', Time.utc(2002, 10, 15, 0, 0, 0))
+    html = '<html><head><title>Article by Sir</title></head><body><h2>abc def ghi</h2></body></html>'
+    doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
+    doc = create_doc('TEST A', 'TEST B', Time.utc(2002, 10, 15, 0, 0, 0))
+    html = '<html><head><title>Article by Sir</title></head><body><h2>abc ghi</h2></body></html>'
+    doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
+    doc = create_doc('TEST A', 'TEST B', Time.utc(2002, 10, 15, 0, 0, 0))
+    html = '<html><head><title>Article by Sir</title></head><body><h2>def ghi</h2></body></html>'
+    doc.add_storage "data:text/html;base64,#{Base64.encode64(html)}"
   end
 
   desc 'Adds some sample users to the database'

@@ -17,6 +17,7 @@ gem 'mongoid-grid_fs'
 gem 'carrierwave', '~> 0.11.2' #TODO: Update to version 1
 gem 'carrierwave-base64'
 gem 'carrierwave-mongoid', '~> 0.10.0', require: 'carrierwave/mongoid'
+gem 'sanitize'
 
 gem 'active_model_serializers'
 

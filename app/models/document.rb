@@ -26,6 +26,21 @@ class Document < MongoidBase
     raise 'Data is already stored' unless file_storage.read.nil?
 
     file_storage.file = data
+    if file_storage.pdf?
+      pdf = file_storage.read
+      text = PopplerPDF.get_text(pdf)
+    elsif file_storage.html?
+      html = file_storage.read
+      text = Sanitize.fragment(html, remove_contents: %w(style script))
+    end
+    # TODO: revist formatting
+    t = text.split("\n").map(&:strip).collect do |line|
+      line.split(/\W+/).join(' ')
+    end
+    t = t.select { |f| f != '' }.join(' ')
+    #puts t
+    file_storage.fulltext = t
+
     file_storage.save!
     save!
   end

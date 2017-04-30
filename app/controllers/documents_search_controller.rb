@@ -3,6 +3,7 @@ class DocumentsSearchController < ApplicationController
   ITEM_TYPES = 'ItemTypes'.freeze
   METADATA = 'Metadata'.freeze
   DESCRIPTION = 'Description'.freeze
+  FULLTEXT = 'FullText'.freeze
   include PaginationController
 
   def search
@@ -11,6 +12,7 @@ class DocumentsSearchController < ApplicationController
       search: [
         :groupType, :andOr, :not,
         :description,
+        :terms,
         fields: [:data, :group, :name, :type],
         tags: [],
         item_types: []
@@ -43,8 +45,13 @@ class DocumentsSearchController < ApplicationController
         query.and(id(c[:not]) => doc_ids)
       when DESCRIPTION
         query.and(description: /#{c[:description]}/)
+      when FULLTEXT
+        #collection = Mongoid::Clients.default[:mongoid_bases]
+        #docs_by_score = collection.find("$text": { "$search": "house" }).projection(score: { "$meta": "textScore" }, document_id: 1).sort(score: { '$meta': 'textScore' })
+        doc_ids = FileStorage.text_search(c[:terms]).pluck(:document_id) #TODO: Move FileStorage into the document?
+        query.and(:id.in => doc_ids)
       else
-        raise 'horrible error!'
+        raise 'Unknown search field'
       end
     end
   end

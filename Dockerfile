@@ -6,6 +6,7 @@ RUN apt-get update && \
     apt-get install -y -qq --no-install-recommends \
         build-essential \
         libxml2-dev libxslt1-dev \
+        poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 ENV INSTALL_PATH /archivist-api
