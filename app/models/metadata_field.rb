@@ -18,12 +18,12 @@ class MetadataField < MongoidBase
     type == MetadataField::Date::TYPE
   end
 
-  def self.data_matches?(data1, data2, type)
+  def self.data_matches?(query, data, type)
     case type
     when MetadataField::String::TYPE
-      data1 == data2
+      !/#{query.downcase}/.match(data.downcase).nil?
     when MetadataField::Date::TYPE
-      data1 == data2
+      data == query
     end
   end
 
