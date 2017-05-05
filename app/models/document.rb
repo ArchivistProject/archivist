@@ -11,7 +11,8 @@ class Document < MongoidBase
     end
   end
 
-  field :description, type: String, default: ''
+  field :search_fields, type: Hash,   default: {}
+  field :description,   type: String, default: ''
 
   def add_group(name)
     group = MetadataGroup.new
