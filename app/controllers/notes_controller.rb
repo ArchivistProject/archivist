@@ -1,10 +1,38 @@
 class NotesController < ApplicationController
   def create
-    document.notes.create! params.require(:note).permit!
+    n = params.require(:note).permit(
+      :highlighter,
+      :highlightId,
+      :text,
+      :note
+    )
+    document.update_attributes n.permit(:highlighter)
+    document.notes.create!(
+      highlight_id: n[:highlightId],
+      highlighted_text: n[:text],
+      content: n[:note]
+    )
   end
 
   def update
-    note.update_attributes params.require(:note).permit!
+    n = params.require(:note).permit(
+      :highlightId,
+      :text,
+      :note
+    )
+    note.update_attribute :highlight_id, n[:highlightId] unless n[:highlightId].nil?
+    note.update_attribute :highlighted_text, n[:highlighted_text] unless n[:highlighted_text].nil?
+    note.update_attribute :content, n[:note] unless n[:note].nil?
+  end
+
+  def destroy
+    n = params.require(:note).permit(
+      :highlighter,
+      :highlightId
+    )
+
+    document.update_attributes n.permit(:highlighter)
+    document.notes.find_by(highlight_id: n[:highlightId]).destroy
   end
 
   private

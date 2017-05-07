@@ -5,8 +5,6 @@ class DocumentSerializer < ActiveModel::Serializer
     object.file_storage.content_type
   end
 
-  has_many :notes
-
   has_many :tags, if: :complete? do
     object.tag_names
   end
@@ -17,6 +15,9 @@ class DocumentSerializer < ActiveModel::Serializer
       memo << group.sorted_fields
     end.flatten
   end
+
+  attribute :highlighter, if: :complete?
+  has_many :notes, if: :complete?
 
   def complete?
     instance_options[:complete]

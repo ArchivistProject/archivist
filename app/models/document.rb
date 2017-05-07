@@ -13,6 +13,7 @@ class Document < MongoidBase
 
   field :search_fields, type: Hash,   default: {}
   field :description,   type: String, default: ''
+  field :highlighter,   type: String, default: ''
 
   def add_group(name)
     group = MetadataGroup.new

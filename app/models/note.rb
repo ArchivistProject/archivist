@@ -3,6 +3,8 @@ class Note < MongoidBase
 
   belongs_to :document
 
-  field :color, type: String
-  field :content, type: String
+  field :highlight_id,     type: String
+  field :color,            type: String
+  field :highlighted_text, type: String
+  field :content,          type: String
 end
