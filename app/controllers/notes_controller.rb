@@ -12,6 +12,7 @@ class NotesController < ApplicationController
       highlighted_text: n[:text],
       content: n[:note]
     )
+    render json: { id: Note.where(highlight_id: n[:highlightId]).pluck(:id) }
   end
 
   def update
