@@ -1,5 +1,5 @@
 class NoteSerializer < ActiveModel::Serializer
-  attribute :color
+  attributes :id, :color
   attribute :highlight_id, key: :highlightId
   attribute :highlighted_text, key: :text
   attribute :content, key: :note
