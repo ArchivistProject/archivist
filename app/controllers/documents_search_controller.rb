@@ -5,6 +5,7 @@ class DocumentsSearchController < ApplicationController
   DESCRIPTION = 'Description'.freeze
   FULLTEXT = 'FullText'.freeze
   include PaginationController
+  include SortController
 
   def search
     attrs = params.permit(
@@ -25,7 +26,7 @@ class DocumentsSearchController < ApplicationController
     docs_query = build_query attrs
     logger.debug docs_query
 
-    docs_to_show = docs_query.paginate(page: attrs[:page], per_page: s.docs_per_page)
+    docs_to_show = order(docs_query).paginate(page: attrs[:page], per_page: s.docs_per_page)
     render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
   end
 
