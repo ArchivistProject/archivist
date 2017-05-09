@@ -18,21 +18,33 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
       create_doc(tags: %w(d))
     ]
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a))
-    ], matches: @doc[0..1])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a))
+      ]
+    }, matches: @doc[0..1])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a))
-    ], matches: @doc[2..2])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a))
+      ]
+    }, matches: @doc[2..2])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'and', true, tags: %w(a))
-    ], matches: @doc[0..1])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'and', true, tags: %w(a))
+      ]
+    }, matches: @doc[0..1])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'and', false, tags: %w(a))
-    ], matches: @doc[2..2])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'and', false, tags: %w(a))
+      ]
+    }, matches: @doc[2..2])
   end
 
   test 'search tags with "or" and "true"/"false"' do
@@ -42,28 +54,43 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
       create_doc(tags: %w(d))
     ]
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a b c))
-    ], matches: @doc[0..1])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a b c))
+      ]
+    }, matches: @doc[0..1])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a b c))
-    ], matches: @doc[2..2])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a b c))
+      ]
+    }, matches: @doc[2..2])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a b c)),
-      s(DocumentsSearchController::TAGS, 'or', true, tags: %w(d))
-    ], matches: @doc[1..1])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a b c)),
+        s(DocumentsSearchController::TAGS, 'or', true, tags: %w(d))
+      ]
+    }, matches: @doc[1..1])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a b c)),
-      s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a d))
-    ], matches: @doc[2..2])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a b c)),
+        s(DocumentsSearchController::TAGS, 'or', true, tags: %w(a d))
+      ]
+    }, matches: @doc[2..2])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a)),
-      s(DocumentsSearchController::TAGS, 'or', false, tags: %w(d))
-    ], matches: [])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'or', false, tags: %w(a)),
+        s(DocumentsSearchController::TAGS, 'or', false, tags: %w(d))
+      ]
+    }, matches: [])
   end
 
   test 'search tags with "and" and "true"/"false"' do
@@ -73,13 +100,19 @@ class DocumentsSearchControllerTest < ActionDispatch::IntegrationTest
       create_doc(tags: %w(d))
     ]
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'and', true, tags: %w(a d))
-    ], matches: @doc[0..1])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'and', true, tags: %w(a d))
+      ]
+    }, matches: @doc[0..1])
 
-    make_post(search: [
-      s(DocumentsSearchController::TAGS, 'and', false, tags: %w(a d))
-    ], matches: @doc[2..2])
+    make_post(search: {
+      andOr: 'and',
+      groups: [
+        s(DocumentsSearchController::TAGS, 'and', false, tags: %w(a d))
+      ]
+    }, matches: @doc[2..2])
   end
 
   private
