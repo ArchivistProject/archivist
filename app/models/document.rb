@@ -43,6 +43,7 @@ class Document < MongoidBase
     file_storage.fulltext = t
 
     file_storage.save!
+    metadata_groups.generic.add_field('File Size', MetadataField::String::TYPE, file_storage.readable_size)
     save!
   end
 
