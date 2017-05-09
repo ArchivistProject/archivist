@@ -21,8 +21,7 @@ class DocumentsSearchController < ApplicationController
         ]
       ]
     )
-    return render_failure if attrs[:search].nil? || attrs[:search][:groups].nil?
-    return render_failure unless attrs[:search][:andOr].in? ['and', 'or']
+    return render_failure if attrs[:search].nil? || attrs[:search][:groups].nil? || !attrs[:search][:andOr].in? %w(and or)
 
     s = Setting.global
 
