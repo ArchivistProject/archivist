@@ -1,24 +1,13 @@
 class DocumentsController < ApplicationController
   include PaginationController
   include PublicAccessibleController
+  include SortController
 
   def index
     s = Setting.global
 
     docs = Document.all
-    if params[:sort_column] && params[:sort_order]
-      order = case params[:sort_order]
-              when 'ascending'
-                :asc
-              when 'descending'
-                :desc
-              else
-                raise 'Unknown sort order'
-              end
-      docs = docs.order("search_fields.#{params[:sort_column]}" => order)
-    end
-
-    paged_docs = docs.paginate(page: params[:page], per_page: s.docs_per_page)
+    paged_docs = order(docs).paginate(page: params[:page], per_page: s.docs_per_page)
     render json: paged_docs, meta: pagination_dict(paged_docs)
   end
 
