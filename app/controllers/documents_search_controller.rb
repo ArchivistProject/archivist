@@ -5,27 +5,31 @@ class DocumentsSearchController < ApplicationController
   DESCRIPTION = 'Description'.freeze
   FULLTEXT = 'FullText'.freeze
   include PaginationController
+  include SortController
 
   def search
     attrs = params.permit(
       :page,
       search: [
-        :groupType, :andOr, :not,
-        :description,
-        :terms,
-        fields: [:data, :group, :name, :type],
-        tags: [],
-        item_types: []
+        :andOr,
+        groups: [
+          :groupType, :andOr, :not,
+          :description,
+          :terms,
+          fields: [:data, :group, :name, :type],
+          tags: [],
+          item_types: []
+        ]
       ]
     )
-    return render_failure if attrs[:search].nil?
+    return render_failure if attrs[:search].nil? || attrs[:search][:groups].nil? || !attrs[:search][:andOr].in?(%w(and or))
 
     s = Setting.global
 
-    docs_query = build_query attrs
+    docs_query = build_query attrs[:search]
     logger.debug docs_query
 
-    docs_to_show = docs_query.paginate(page: attrs[:page], per_page: s.docs_per_page)
+    docs_to_show = order(docs_query).paginate(page: attrs[:page], per_page: s.docs_per_page)
     render json: docs_to_show, meta: pagination_dict(docs_to_show), root: 'documents'
   end
 
@@ -34,24 +38,24 @@ class DocumentsSearchController < ApplicationController
   def build_query(attrs)
     # NOTE: pretty sure sorting doesn't help at all in the current form
     # TODO: accumulate nin doc ids as to not reuse them in search?
-    attrs[:search].inject(Document) do |query, c|
+    attrs[:groups].inject(Document) do |query, c|
       case c[:groupType]
       when ITEM_TYPES
         doc_ids = search_item_types(c[:item_types], c[:andOr])
-        query.and(id(c[:not]) => doc_ids)
+        query.public_send(attrs[:andOr], id(c[:not]) => doc_ids)
       when TAGS
         doc_ids = search_tags(c[:tags], c[:andOr])
-        query.and(id(c[:not]) => doc_ids)
+        query.public_send(attrs[:andOr], id(c[:not]) => doc_ids)
       when METADATA
         doc_ids = search_fields(c[:fields], c[:andOr])
-        query.and(id(c[:not]) => doc_ids)
+        query.public_send(attrs[:andOr], id(c[:not]) => doc_ids)
       when DESCRIPTION
-        query.and(description: /#{c[:description]}/)
+        query.public_send(attrs[:andOr], description: /#{c[:description]}/)
       when FULLTEXT
         #collection = Mongoid::Clients.default[:mongoid_bases]
         #docs_by_score = collection.find("$text": { "$search": "house" }).projection(score: { "$meta": "textScore" }, document_id: 1).sort(score: { '$meta': 'textScore' })
         doc_ids = FileStorage.text_search(c[:terms]).pluck(:document_id) #TODO: Move FileStorage into the document?
-        query.and(:id.in => doc_ids)
+        query.public_send(attrs[:andOr], id(c[:not]) => doc_ids)
       else
         raise 'Unknown search field'
       end
