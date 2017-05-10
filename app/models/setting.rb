@@ -1,5 +1,5 @@
 class Setting < MongoidBase
-  field :docs_per_page, type: Integer, default: 10
+  field :docs_per_page, type: Numeric, default: 10
 
   validates :docs_per_page, numericality: { only_integer: true, greater_than: 0 }
 
