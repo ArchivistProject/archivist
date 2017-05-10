@@ -10,7 +10,7 @@ class FileStorage < MongoidBase
 
   def readable_size
     in_kb = size / 1000.0
-    return "#{in_kb / 1000.0} MB" if inKB > 500
+    return "#{in_kb / 1000.0} MB" if in_kb > 500
     "#{in_kb} KB"
   end
 
