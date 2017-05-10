@@ -10,7 +10,6 @@ module PublicAccessibleController
     doc = Document.create_new_doc
 
     doc.update_attribute(:description, attrs[:description] || '')
-    doc.add_storage(attrs[:file]) # FORMAT: EG: data:application/pdf;base64,%s
     doc.update_tags(attrs[:tags].nil? ? [] : attrs[:tags])
 
     attrs[:metadata_fields].group_by { |g| g[:group] }.each do |group_name, fields|
@@ -23,6 +22,8 @@ module PublicAccessibleController
         group.add_field(r.name, r.type, nil) unless r.name.in? field_names
       end
     end
+
+    doc.add_storage(attrs[:file]) # FORMAT: EG: data:application/pdf;base64,%s
 
     render_success
   end
