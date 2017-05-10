@@ -59,7 +59,8 @@ class DocumentsSearchController < ApplicationController
   end
 
   def search_tags(tags, and_or)
-    ds = Tag.where(:name.in => tags).pluck(:document_ids)
+    little_tags = tags.map { |t| t.downcase }
+    ds = Tag.where(:search_name.in => little_tags).pluck(:document_ids)
     if and_or == 'and'
       doc_ids = ds.inject { |a, e| Set.new(a) & Set.new(e) }.to_a # intersection
     elsif and_or == 'or' # else?
