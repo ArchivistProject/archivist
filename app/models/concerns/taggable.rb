@@ -14,7 +14,7 @@ module Taggable
     to_add    = new_tags - current_tags
     to_remove = current_tags - new_tags
 
-    to_add.each { |t| tags << Tag.where(name: t).first_or_create! }
+    to_add.each { |t| tags << Tag.where(name: t, search_name: t.downcase).first_or_create! }
     to_remove.each { |t| tags.delete Tag.find_by(name: t) }
   end
 end

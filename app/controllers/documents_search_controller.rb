@@ -64,11 +64,14 @@ class DocumentsSearchController < ApplicationController
 
   def search_tags(tags, and_or)
     little_tags = tags.map { |t| t.downcase }
-    ds = Tag.where(:search_name.in => little_tags).pluck(:document_ids)
+    ds = Tag.where(:search_name.in => little_tags).pluck(:search_name, :document_ids)
+    rt = ds.group_by { |t| t[0] }.map do |tag, docs|
+      (Set.new(docs.flatten) - Set.new([tag])).to_a
+    end
     if and_or == 'and'
-      doc_ids = ds.inject { |a, e| Set.new(a) & Set.new(e) }.to_a # intersection
+      doc_ids = rt.inject { |a, e| Set.new(a) & Set.new(e) }.to_a # intersection
     elsif and_or == 'or' # else?
-      doc_ids = ds.flatten.uniq
+      doc_ids = rt.flatten.uniq
     end
 
     doc_ids
