@@ -22,7 +22,7 @@ class MetadataField < MongoidBase
 
   def self.data_matches?(query, data, type)
     return false if data.nil?
-    
+
     case type
     when MetadataField::String::TYPE
       !/#{query.downcase}/.match(data.downcase).nil?
