@@ -9,14 +9,14 @@ class NotesController < ApplicationController
       :note
     )
     document.update_attributes n.permit(:highlighter)
-    document.notes.create!(
+    new_note = document.notes.create!(
       highlight_id: n[:highlightId],
       highlighted_text: n[:text],
       content: n[:note],
       num_elems: n[:numElements],
       start_pos: n[:startPos]
     )
-    render json: { id: Note.where(highlight_id: n[:highlightId]).pluck(:id) }
+    render json: { id: new_note.id }
   end
 
   def update
