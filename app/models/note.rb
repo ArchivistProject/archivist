@@ -8,4 +8,5 @@ class Note < MongoidBase
   field :highlighted_text, type: String
   field :content,          type: String
   field :num_elems,        type: Integer
+  field :start_pos,        type: Integer
 end

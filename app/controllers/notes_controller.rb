@@ -4,6 +4,7 @@ class NotesController < ApplicationController
       :highlighter,
       :highlightId,
       :numElements,
+      :startPos,
       :text,
       :note
     )
@@ -13,6 +14,7 @@ class NotesController < ApplicationController
       highlighted_text: n[:text],
       content: n[:note],
       num_elems: n[:numElements],
+      start_pos: n[:startPos]
     )
     render json: { id: Note.where(highlight_id: n[:highlightId]).pluck(:id) }
   end
