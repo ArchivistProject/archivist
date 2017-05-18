@@ -31,13 +31,9 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    n = params.require(:note).permit(
-      :highlighter,
-      :highlightId
-    )
-
-    document.update_attributes n.permit(:highlighter)
-    document.notes.find_by(highlight_id: n[:highlightId]).destroy
+    document.update_attributes params.require(:note).permit(:highlighter)
+    document.notes.find_by(id: params[:id]).destroy
+    render_success
   end
 
   private
