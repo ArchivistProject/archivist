@@ -3,4 +3,5 @@ class NoteSerializer < ActiveModel::Serializer
   attribute :highlight_id, key: :highlightId
   attribute :highlighted_text, key: :text
   attribute :content, key: :note
+  attribute :num_elems, key: :numElements
 end

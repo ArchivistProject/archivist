@@ -3,6 +3,7 @@ class NotesController < ApplicationController
     n = params.require(:note).permit(
       :highlighter,
       :highlightId,
+      :numElements,
       :text,
       :note
     )
@@ -10,7 +11,8 @@ class NotesController < ApplicationController
     document.notes.create!(
       highlight_id: n[:highlightId],
       highlighted_text: n[:text],
-      content: n[:note]
+      content: n[:note],
+      num_elems: n[:numElements],
     )
     render json: { id: Note.where(highlight_id: n[:highlightId]).pluck(:id) }
   end
